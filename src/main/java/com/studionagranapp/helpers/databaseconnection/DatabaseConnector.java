@@ -7,12 +7,12 @@ public class DatabaseConnector {
 
     public Connection connect() {
         Connection connection = null;
-        final String DATABASE_NAME = "BD2-LocalDB";
+        final String DATABASE_NAME = "BD2_Projekt_StudioNagran";
         String url = "jdbc:mysql://localhost/" + DATABASE_NAME;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             final String DATABASE_USER = "root";
-            final String DATABSE_PASSWORD = "";
+            final String DATABSE_PASSWORD = "password";
             connection = DriverManager.getConnection(url, DATABASE_USER, DATABSE_PASSWORD);
         } catch (Exception e) {
             e.printStackTrace();
