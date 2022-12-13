@@ -8,32 +8,42 @@
    <bottom>
       <AnchorPane prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="loginButton" layoutX="360.0" layoutY="198.0" mnemonicParsing="false" onAction="#login" text="Zaloguj się">
+            <Button fx:id="loginButton" layoutX="291.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="105.0" style="-fx-background-color: #B25900;" text="Zaloguj się">
                <font>
-                  <Font name="SF Pro Display Regular" size="14.0" />
+                  <Font name="SF Pro Display Bold" size="14.0" />
                </font>
             </Button>
-            <TextField fx:id="usernameField" layoutX="311.0" layoutY="90.0" prefHeight="24.0" prefWidth="180.0" promptText="Nazwa użytkownika" />
-            <PasswordField fx:id="passwordField" layoutX="311.0" layoutY="128.0" prefHeight="25.0" prefWidth="180.0" promptText="Hasło">
+            <TextField fx:id="usernameField" layoutX="291.0" layoutY="90.0" prefHeight="24.0" prefWidth="220.0" promptText="Nazwa użytkownika" />
+            <PasswordField fx:id="passwordField" layoutX="291.0" layoutY="142.0" prefHeight="25.0" prefWidth="220.0" promptText="Hasło">
                <font>
                   <Font name="SF Pro Display Regular" size="13.0" />
                </font>
             </PasswordField>
-            <Label layoutX="310.0" layoutY="75.0" text="Nazwa użytkownika">
-               <font>
-                  <Font name="SF Pro Display Regular" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="311.0" layoutY="114.0" text="Hasło">
-               <font>
-                  <Font name="SF Pro Display Regular" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="statementField" layoutX="311.0" layoutY="167.0" prefHeight="17.0" prefWidth="180.0" textFill="RED">
+            <Label layoutX="291.0" layoutY="73.0" text="Nazwa użytkownika">
                <font>
                   <Font name="SF Pro Display Regular" size="13.0" />
                </font>
             </Label>
+            <Label layoutX="291.0" layoutY="125.0" text="Hasło">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="statementField" layoutX="211.0" layoutY="175.0" prefHeight="17.0" prefWidth="380.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="newClientButton" layoutX="406.0" layoutY="200.0" mnemonicParsing="false" onAction="#newClient" prefHeight="32.0" prefWidth="105.0" style="-fx-background-color: #B25900;" text="Nowy Klient">
+               <font>
+                  <Font name="SF Pro Display Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" layoutX="348.0" layoutY="254.0" mnemonicParsing="false" onAction="#quit" prefHeight="32.0" prefWidth="105.0" style="-fx-background-color: #B25900;" text="Wyjdź">
+               <font>
+                  <Font name="SF Pro Display Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </bottom>

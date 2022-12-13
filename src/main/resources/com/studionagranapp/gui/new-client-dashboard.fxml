@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController">
+    <top>
+        <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="returnButton" layoutX="686.0" layoutY="24.0" mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;" text="Powrót" textAlignment="CENTER" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Label layoutX="14.0" layoutY="26.0" text="Rezerwacja Pierwszej Sesji">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#bookSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Zarezerwuj Sesję" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children></AnchorPane>
+    </bottom>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="137.0" layoutY="3.0" text="Dane osobowe:">
+               <font>
+                  <Font name="SF Pro Display Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="18.0" text="Imię">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameField" layoutX="14.0" layoutY="39.0" prefHeight="24.0" prefWidth="360.0" />
+            <TextField fx:id="surnameField" layoutX="14.0" layoutY="111.0" prefHeight="24.0" prefWidth="360.0" />
+            <TextField fx:id="usernameField" layoutX="14.0" layoutY="183.0" prefWidth="360.0" />
+            <PasswordField fx:id="passwordField" layoutX="14.0" layoutY="255.0" prefWidth="360.0" />
+            <Label layoutX="14.0" layoutY="90.0" text="Nazwisko">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="162.0" text="Nazwa użytkownika">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="234.0" text="Hasło">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="bandField" layoutX="14.0" layoutY="327.0" prefWidth="360.0" />
+            <Label layoutX="14.0" layoutY="306.0" text="Nazwa zespołu/wykonawcy">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="engineerChoiceBox" layoutX="14.0" layoutY="399.0" prefWidth="360.0" />
+            <Label layoutX="14.0" layoutY="378.0" text="Wybierz realizatora:">
+               <font>
+                  <Font name="SF Pro Display Regular" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <DatePicker layoutX="21.0" layoutY="39.0" prefHeight="24.0" prefWidth="360.0" />
+            <Label layoutX="87.0" layoutY="3.0" text="Wybierz datę roczpoczęcia:">
+               <font>
+                  <Font name="SF Pro Display Bold" size="18.0" />
+               </font>
+            </Label>
+            <TableView layoutX="1.0" layoutY="183.0" prefHeight="257.0" prefWidth="400.0">
+              <columns>
+                <TableColumn editable="false" prefWidth="200.0" text="Nazwa" />
+                <TableColumn prefWidth="200.0" text="Rodzaj Sprzętu" />
+              </columns>
+            </TableView>
+            <Label layoutX="149.0" layoutY="147.0" text="Nasz sprzęt:">
+               <font>
+                  <Font name="SF Pro Display Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="91.0" layoutY="75.0" text="Wybierz datę zakończenia:">
+               <font>
+                  <Font name="SF Pro Display Bold" size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="21.0" layoutY="111.0" prefHeight="24.0" prefWidth="360.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
