@@ -4,26 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/Launcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/sectionloaders/SceneCreator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/sectionloaders/SectionLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/login-panel.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/styles/styles.css" afterDir="false" />
+    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Database connection">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/ClientsDashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/NewClientsDashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/UserInfoProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/ValidationResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Gear.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Session.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/client-dashboard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/new-client-dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/databaseconnection/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/databaseconnection/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/databaseconnection/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/databaseconnection/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/LoginValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/LoginValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/sectionloaders/SceneCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/contentloaders/SceneCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/sectionloaders/SectionLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/contentloaders/SectionLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/login-panel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/login-panel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +36,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Enum" />
+        <option value="Interface" />
         <option value="JavaFXApplication" />
+        <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -55,21 +61,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/opt/scenebuilder/bin/SceneBuilder",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/opt/scenebuilder/bin/SceneBuilder&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/studionagranapp" />
@@ -108,11 +119,45 @@
       <workItem from="1670942201490" duration="2133000" />
       <workItem from="1670944339793" duration="227000" />
       <workItem from="1670944582969" duration="78000" />
-      <workItem from="1670944667090" duration="2968000" />
+      <workItem from="1670944667090" duration="7457000" />
+      <workItem from="1670953509024" duration="1520000" />
+      <workItem from="1670955034702" duration="85000" />
+      <workItem from="1670955128696" duration="7523000" />
     </task>
+    <task id="LOCAL-00001" summary="Gui login screen">
+      <created>1670948544914</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670948544914</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Database connection">
+      <created>1670949682070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670949682070</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Gui login screen" />
+    <MESSAGE value="Database connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Database connection" />
   </component>
 </project>
