@@ -1,4 +1,4 @@
-package com.studionagranapp.helpers.sectionloaders;
+package com.studionagranapp.helpers.contentloaders;
 
 import com.studionagranapp.Main;
 import javafx.fxml.FXMLLoader;
