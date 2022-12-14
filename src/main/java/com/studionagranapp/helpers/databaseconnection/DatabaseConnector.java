@@ -7,7 +7,7 @@ public class DatabaseConnector {
 
     public Connection connect() {
         Connection connection = null;
-        final String DATABASE_NAME = "BD2_Projekt_StudioNagran";
+        final String DATABASE_NAME = "Studio_nagran";
         String url = "jdbc:mysql://localhost/" + DATABASE_NAME;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

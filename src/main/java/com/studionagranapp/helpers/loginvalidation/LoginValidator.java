@@ -21,7 +21,7 @@ public class LoginValidator implements LoginValidation {
     public ValidationResult validate() {
         ValidationResult result = ValidationResult.INVALID_LOGIN;
 
-        String verifyLogin = "SELECT count(1) FROM BD2_Projekt_StudioNagran.users_accounts WHERE username = '"
+        String verifyLogin = "SELECT count(1) FROM Studio_nagran.User_accounts WHERE username = '"
                 + this.username + "' AND password = '" + this.password + "'";
 
         ResultSet queryResult = databaseManager.executeQuery(verifyLogin);
