@@ -2,6 +2,7 @@ package com.studionagranapp.guicontrollers.login;
 
 import com.studionagranapp.guicontrollers.userdashboard.ClientsDashboardController;
 import com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.OwnersDashboardController;
 import com.studionagranapp.helpers.loginvalidation.LoginValidation;
 import com.studionagranapp.helpers.loginvalidation.LoginValidator;
 import com.studionagranapp.helpers.loginvalidation.UserInfoProvider;
@@ -39,7 +40,13 @@ public class LoginController {
 
                 UserInfoProvider userInfoProvider = new UserInfoProvider(usernameField.getText(), passwordField.getText());
                 switch (userInfoProvider.getRole()) {
-                    case "owner" -> System.out.println("Zalogowano jako właściciel");
+                    case "owner" -> {
+                        OwnersDashboardController ownersDashboardController = (OwnersDashboardController)
+                                SceneCreator.createScene("gui/owner-dashboard.fxml", 800, 600);
+                        assert ownersDashboardController != null;
+                        ownersDashboardController.setUserInfo(userInfoProvider.getName());
+                        quit();
+                    }
                     case "engineer" -> System.out.println("Zalogowano jako realizator");
                     case "client" -> {
                         ClientsDashboardController clientsDashboardController = (ClientsDashboardController)
