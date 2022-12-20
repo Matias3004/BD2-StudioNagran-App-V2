@@ -1,6 +1,6 @@
 package com.studionagranapp.helpers.models;
 
-public class Gear {
+public class Equipment {
 
     private final Integer id;
     private final String name;
@@ -8,7 +8,7 @@ public class Gear {
     private final Integer quantity;
     private final Boolean backline;
 
-    public Gear(Integer id, String name, String type, Integer quantity, Boolean backline) {
+    public Equipment(Integer id, String name, String type, Integer quantity, Boolean backline) {
         this.id = id;
         this.name = name;
         this.type = type;
