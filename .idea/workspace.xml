@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Owner can now see all engineers">
+    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Client can now see his sessions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/ClientsDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/ClientsDashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/SessionsTableConfigurator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/SessionsTableConfigurator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/client-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/client-dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +137,8 @@
       <workItem from="1671573911082" duration="1284000" />
       <workItem from="1671575219108" duration="66000" />
       <workItem from="1671575298808" duration="3252000" />
-      <workItem from="1671620417301" duration="12285000" />
+      <workItem from="1671620417301" duration="13778000" />
+      <workItem from="1671638077923" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="Gui login screen">
       <created>1670948544914</created>
@@ -242,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671630551229</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Client can now see his sessions">
+      <created>1671633542072</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671633542072</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +276,8 @@
     <MESSAGE value="Database SQL files" />
     <MESSAGE value="Owner can now see all clients" />
     <MESSAGE value="Owner can now see all engineers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Owner can now see all engineers" />
+    <MESSAGE value="Client can now see his sessions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client can now see his sessions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

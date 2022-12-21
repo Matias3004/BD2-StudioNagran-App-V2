@@ -1,5 +1,6 @@
 package com.studionagranapp.guicontrollers.userdashboard;
 
+import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
@@ -52,17 +53,28 @@ public class EngineersDashboardController implements Initializable {
     @FXML
     private TableColumn<Session, Integer>seshDurationColumn;
 
+    @FXML
+    private TableView<Equipment> equipmentTable;
+    @FXML
+    private TableColumn<Equipment, String> eqNameColumn;
+    @FXML
+    private TableColumn<Equipment, String> eqTypeColumn;
+    @FXML
+    private TableColumn<Equipment, Integer> eqQuantityColumn;
+
     private final ObservableList<Session> sessionsObservableList = FXCollections.observableArrayList();
     private final ObservableList<Mix> mixesObservableList = FXCollections.observableArrayList();
     private final ObservableList<MixNote> mixNotesObservableList = FXCollections.observableArrayList();
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
     private final DatabaseManager databaseManager;
     private final SessionsTableConfigurator sessionsTableConfigurator;
+    private final EquipmentTableConfigurator equipmentTableConfigurator;
     private final AlertManager alertManager;
 
     public EngineersDashboardController() {
         databaseManager = DatabaseManager.getInstance();
         sessionsTableConfigurator = new SessionsTableConfigurator();
+        equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
 
@@ -77,7 +89,9 @@ public class EngineersDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionsTableConfigurator.provideEngineerConfiguration(sessionsObservableList, mySessionsTable, userId);
-        initData();
+        equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
+        initSessionsData();
+        initEquipmentData();
     }
 
     @FXML
@@ -105,10 +119,12 @@ public class EngineersDashboardController implements Initializable {
     @FXML
     private void refresh() {
         sessionsTableConfigurator.provideEngineerConfiguration(sessionsObservableList, mySessionsTable, userId);
-        initData();
+        equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
+        initSessionsData();
+        initEquipmentData();
     }
 
-    private void initData() {
+    private void initSessionsData() {
         seshNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         seshClientColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         seshBandColumn.setCellValueFactory(new PropertyValueFactory<>("bandName"));
@@ -124,5 +140,20 @@ public class EngineersDashboardController implements Initializable {
         sortedData.comparatorProperty().bind(mySessionsTable.comparatorProperty());
 
         mySessionsTable.setItems(sortedData);
+    }
+
+    private void initEquipmentData() {
+        eqNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        eqTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        eqQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+        equipmentTable.setItems(equipmentObservableList);
+
+        FilteredList<Equipment> filteredData = new FilteredList<>(equipmentObservableList, b -> true);
+
+        SortedList<Equipment> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(equipmentTable.comparatorProperty());
+
+        equipmentTable.setItems(sortedData);
     }
 }
