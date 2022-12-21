@@ -4,22 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Client's dashboard now shows available backline">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/EngineersTableConfigurator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/SessionsTableConfigurator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Mix.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/MixNote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Roles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/database/database_equipment.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/database/database_users.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/engineer-dashboard.fxml" afterDir="false" />
+    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Database SQL files">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/ClientsTableConfigurator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/UserInfoProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/UserInfoProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/EngineersTableConfigurator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/EngineersTableConfigurator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/owner-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/owner-dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +143,7 @@
       <workItem from="1671573911082" duration="1284000" />
       <workItem from="1671575219108" duration="66000" />
       <workItem from="1671575298808" duration="3252000" />
-      <workItem from="1671620417301" duration="5456000" />
+      <workItem from="1671620417301" duration="8640000" />
     </task>
     <task id="LOCAL-00001" summary="Gui login screen">
       <created>1670948544914</created>
@@ -202,7 +194,42 @@
       <option name="project" value="LOCAL" />
       <updated>1671553950480</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Inżynierowi wyświetlają się jego sesje">
+      <created>1671626462883</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671626462883</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Inżynierowi wyświetlają się jego sesje">
+      <created>1671626519743</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671626519743</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Właścicielowi wyświetlają się wszystkie sesje">
+      <created>1671626577490</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671626577490</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Dodano modele miksów i uwag do miksów">
+      <created>1671626628305</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671626628305</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Database SQL files">
+      <created>1671627407718</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671627407718</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +254,11 @@
     <MESSAGE value="Renamed some stuff" />
     <MESSAGE value="Owner's dashboard now shows all equipment" />
     <MESSAGE value="Client's dashboard now shows available backline" />
-    <option name="LAST_COMMIT_MESSAGE" value="Client's dashboard now shows available backline" />
+    <MESSAGE value="Inżynierowi wyświetlają się jego sesje" />
+    <MESSAGE value="Właścicielowi wyświetlają się wszystkie sesje" />
+    <MESSAGE value="Dodano modele miksów i uwag do miksów" />
+    <MESSAGE value="Database SQL files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Database SQL files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
