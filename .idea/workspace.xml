@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Basic UI for the owner">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/EquipmentTableConfigurator.java" afterDir="false" />
+    <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Client's dashboard now shows available backline">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/EngineersTableConfigurator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/configurators/tableconfigurators/SessionsTableConfigurator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Mix.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/MixNote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Roles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/database/database_equipment.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/database/database_users.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/engineer-dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/ClientsDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/ClientsDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/OwnersDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Gear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/client-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/client-dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/UserInfoProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/loginvalidation/UserInfoProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/helpers/models/Session.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/owner-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui/owner-dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,9 +31,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Enum" />
         <option value="Interface" />
         <option value="JavaFXApplication" />
+        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
       </list>
@@ -73,12 +81,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/studionagranapp/database" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/studionagranapp" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/studionagranapp/gui" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.studionagranapp.Launcher" />
       <module name="Studio-Nagran-App" />
@@ -92,8 +101,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.studionagranapp.Main" />
+      <module name="Studio-Nagran-App" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.studionagranapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
@@ -124,7 +147,11 @@
       <workItem from="1671468586010" duration="15000" />
       <workItem from="1671470555553" duration="51000" />
       <workItem from="1671546783049" duration="1562000" />
-      <workItem from="1671552790943" duration="946000" />
+      <workItem from="1671552790943" duration="3228000" />
+      <workItem from="1671573911082" duration="1284000" />
+      <workItem from="1671575219108" duration="66000" />
+      <workItem from="1671575298808" duration="3252000" />
+      <workItem from="1671620417301" duration="5456000" />
     </task>
     <task id="LOCAL-00001" summary="Gui login screen">
       <created>1670948544914</created>
@@ -154,7 +181,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671012189374</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Renamed some stuff">
+      <created>1671553830637</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671553830637</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Owner's dashboard now shows all equipment">
+      <created>1671553924666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671553924666</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Client's dashboard now shows available backline">
+      <created>1671553950480</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671553950480</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +224,19 @@
     <MESSAGE value="Database connection" />
     <MESSAGE value="FXML file for owner's dashboard panel" />
     <MESSAGE value="Basic UI for the owner" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic UI for the owner" />
+    <MESSAGE value="Renamed some stuff" />
+    <MESSAGE value="Owner's dashboard now shows all equipment" />
+    <MESSAGE value="Client's dashboard now shows available backline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client's dashboard now shows available backline" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalStateException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
