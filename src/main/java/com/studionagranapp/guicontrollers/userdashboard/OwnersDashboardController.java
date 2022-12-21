@@ -1,6 +1,7 @@
 package com.studionagranapp.guicontrollers.userdashboard;
 
 import com.studionagranapp.helpers.configurators.tableconfigurators.ClientsTableConfigurator;
+import com.studionagranapp.helpers.configurators.tableconfigurators.EngineersTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Filter;
 
 public class OwnersDashboardController implements Initializable {
 
@@ -61,6 +61,15 @@ public class OwnersDashboardController implements Initializable {
     TableColumn<User, String> clientPhoneColumn;
 
     @FXML
+    TableView<User> engineersTable;
+    @FXML
+    TableColumn<User, String> engineerFullNameColumn;
+    @FXML
+    TableColumn<User, String> engineerEmailColumn;
+    @FXML
+    TableColumn<User, String> engineerPhoneColumn;
+
+    @FXML
     TableView<Equipment> equipmentTable;
     @FXML
     TableColumn<Equipment, String> eqNameColumn;
@@ -71,10 +80,13 @@ public class OwnersDashboardController implements Initializable {
 
     private final ObservableList<Session> sessionsObservableList = FXCollections.observableArrayList();
     private final ObservableList<User> clientsObservableList = FXCollections.observableArrayList();
+    private final ObservableList<User> engineersObservableList = FXCollections.observableArrayList();
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
+
     private final DatabaseManager databaseManager;
     private final SessionsTableConfigurator sessionsTableConfigurator;
     private final ClientsTableConfigurator clientsTableConfigurator;
+    private final EngineersTableConfigurator engineersTableConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
     private final AlertManager alertManager;
 
@@ -82,6 +94,7 @@ public class OwnersDashboardController implements Initializable {
         databaseManager = DatabaseManager.getInstance();
         sessionsTableConfigurator = new SessionsTableConfigurator();
         clientsTableConfigurator = new ClientsTableConfigurator();
+        engineersTableConfigurator = new EngineersTableConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
@@ -90,9 +103,11 @@ public class OwnersDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionsTableConfigurator.provideFullConfiguration(sessionsObservableList, sessionsTable);
         clientsTableConfigurator.provideConfiguration(clientsObservableList, clientsTable);
+        engineersTableConfigurator.provideConfiguration(engineersObservableList, engineersTable);
         equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
         initClientsData();
+        initEngineersData();
         initEquipmentData();
     }
 
@@ -126,9 +141,12 @@ public class OwnersDashboardController implements Initializable {
     @FXML
     private void refresh() {
         sessionsTableConfigurator.provideFullConfiguration(sessionsObservableList, sessionsTable);
+        clientsTableConfigurator.provideConfiguration(clientsObservableList, clientsTable);
+        engineersTableConfigurator.provideConfiguration(engineersObservableList, engineersTable);
         equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
         initClientsData();
+        initEngineersData();
         initEquipmentData();
     }
 
@@ -164,6 +182,21 @@ public class OwnersDashboardController implements Initializable {
         sortedData.comparatorProperty().bind(clientsTable.comparatorProperty());
 
         clientsTable.setItems(sortedData);
+    }
+
+    private void initEngineersData() {
+        engineerFullNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        engineerEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        engineerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+
+        engineersTable.setItems(engineersObservableList);
+
+        FilteredList<User> filteredData = new FilteredList<>(engineersObservableList, b -> true);
+
+        SortedList<User> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(engineersTable.comparatorProperty());
+
+        engineersTable.setItems(sortedData);
     }
 
     private void initEquipmentData() {
