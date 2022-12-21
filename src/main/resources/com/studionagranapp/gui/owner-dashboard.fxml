@@ -58,14 +58,15 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView layoutX="300.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="sessionsTable" layoutX="300.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn prefWidth="160.0" resizable="false" text="Sesja" />
-                                        <TableColumn prefWidth="160.0" resizable="false" text="Klient" />
-                                        <TableColumn prefWidth="180.0" resizable="false" text="Zespół/Wykonawca" />
-                                        <TableColumn prefWidth="100.0" resizable="false" text="Data rozpoczęcia" />
-                                        <TableColumn prefWidth="100.0" resizable="false" text="Data zakończenia" />
-                                        <TableColumn prefWidth="100.0" resizable="false" text="Czas trwania [h]" />
+                                        <TableColumn fx:id="seshNameColumn" prefWidth="110.0" resizable="true" text="Sesja" />
+                                        <TableColumn fx:id="seshClientColumn" prefWidth="110.0" resizable="true" text="Klient" />
+                                        <TableColumn fx:id="seshBandColumn" prefWidth="180.0" resizable="true" text="Zespół/Wykonawca" />
+                                        <TableColumn fx:id="seshEngineerColumn" prefWidth="100.0" resizable="true" text="Realizator" />
+                                        <TableColumn fx:id="seshBeginColumn" prefWidth="100.0" resizable="true" text="Data rozpoczęcia" />
+                                        <TableColumn fx:id="seshEndColumn" prefWidth="100.0" resizable="true" text="Data zakończenia" />
+                                        <TableColumn fx:id="seshDurationColumn" prefWidth="100.0" resizable="true" text="Czas trwania [h]" />
                                     </columns>
                                 </TableView>
                             </children></AnchorPane>
