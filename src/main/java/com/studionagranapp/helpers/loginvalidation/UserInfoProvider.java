@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 public class UserInfoProvider {
 
+    private Integer id;
     private String name;
     private String role;
     private final DatabaseManager databaseManager = DatabaseManager.getInstance();
@@ -20,6 +21,7 @@ public class UserInfoProvider {
         try {
             ResultSet user = databaseManager.executeQuery(getUserQuery);
             while (user.next()) {
+                this.id = user.getInt("account_id");
                 this.name = user.getString("first_name") + " " + user.getString("last_name");
                 this.role = user.getString("role");
             }
@@ -29,6 +31,9 @@ public class UserInfoProvider {
         }
     }
 
+    public Integer getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }

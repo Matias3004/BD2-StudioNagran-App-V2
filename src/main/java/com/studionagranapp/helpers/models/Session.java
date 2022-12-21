@@ -10,18 +10,18 @@ public class Session {
     private final Date startDate;
     private final Date endDate;
     private final Integer duration;
-    private final Integer clientID;
-    private final Integer engineerID;
+    private final String clientName;
+    private final String engineerName;
 
-    public Session(Integer id, String name, String bandName, Date startDate, Date endDate, Integer duration, Integer clientID, Integer engineerID) {
+    public Session(Integer id, String name, String bandName, Date startDate, Date endDate, Integer duration, String clientName, String engineerName) {
         this.id = id;
         this.name = name;
         this.bandName = bandName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.duration = duration;
-        this.clientID = clientID;
-        this.engineerID = engineerID;
+        this.clientName = clientName;
+        this.engineerName = engineerName;
     }
 
     public Integer getId() {
@@ -48,11 +48,11 @@ public class Session {
         return duration;
     }
 
-    public Integer getClientID() {
-        return clientID;
+    public String getClientName() {
+        return clientName;
     }
 
-    public Integer getEngineerID() {
-        return engineerID;
+    public String getEngineerName() {
+        return engineerName;
     }
 }
