@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94ed8b09-46ea-4a11-a739-08322ab863dc" name="Changes" comment="Client can now see his sessions">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/studionagranapp/guicontrollers/userdashboard/EngineersDashboardController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +139,7 @@
       <workItem from="1671575298808" duration="3252000" />
       <workItem from="1671620417301" duration="13778000" />
       <workItem from="1671638077923" duration="28000" />
+      <workItem from="1671638570872" duration="101000" />
     </task>
     <task id="LOCAL-00001" summary="Gui login screen">
       <created>1670948544914</created>
