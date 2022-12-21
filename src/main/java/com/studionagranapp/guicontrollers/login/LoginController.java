@@ -1,6 +1,7 @@
 package com.studionagranapp.guicontrollers.login;
 
 import com.studionagranapp.guicontrollers.userdashboard.ClientsDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.EngineersDashboardController;
 import com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController;
 import com.studionagranapp.guicontrollers.userdashboard.OwnersDashboardController;
 import com.studionagranapp.helpers.loginvalidation.LoginValidation;
@@ -40,15 +41,23 @@ public class LoginController {
 
                 UserInfoProvider userInfoProvider = new UserInfoProvider(usernameField.getText(), passwordField.getText());
                 switch (userInfoProvider.getRole()) {
-                    case "owner" -> {
+                    case "OWNER" -> {
                         OwnersDashboardController ownersDashboardController = (OwnersDashboardController)
                                 SceneCreator.createScene("gui/owner-dashboard.fxml", 800, 600);
                         assert ownersDashboardController != null;
+                        ownersDashboardController.setUserId(userInfoProvider.getId());
                         ownersDashboardController.setUserInfo(userInfoProvider.getName());
                         quit();
                     }
-                    case "engineer" -> System.out.println("Zalogowano jako realizator");
-                    case "client" -> {
+                    case "ENGINEER" -> {
+                        EngineersDashboardController engineersDashboardController = (EngineersDashboardController)
+                                SceneCreator.createScene("gui/engineer-dashboard.fxml", 800, 600);
+                        assert engineersDashboardController != null;
+                        engineersDashboardController.setUserId(userInfoProvider.getId());
+                        engineersDashboardController.setUserInfo(userInfoProvider.getName());
+                        quit();
+                    }
+                    case "CLIENT" -> {
                         ClientsDashboardController clientsDashboardController = (ClientsDashboardController)
                                 SceneCreator.createScene("gui/client-dashboard.fxml", 800, 600);
                         assert clientsDashboardController != null;
