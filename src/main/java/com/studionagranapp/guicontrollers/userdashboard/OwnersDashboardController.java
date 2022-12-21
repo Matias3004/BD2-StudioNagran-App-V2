@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -99,8 +100,28 @@ public class OwnersDashboardController implements Initializable {
         alertManager = new AlertManager();
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setUserInfo(String userInfo) {
+        this.userInfo.setText(userInfo);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        sessionsTableConfigurator.provideFullConfiguration(sessionsObservableList, sessionsTable);
+        clientsTableConfigurator.provideConfiguration(clientsObservableList, clientsTable);
+        engineersTableConfigurator.provideConfiguration(engineersObservableList, engineersTable);
+        equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
+        initSessionsData();
+        initClientsData();
+        initEngineersData();
+        initEquipmentData();
+    }
+
+    @FXML
+    private void refresh() {
         sessionsTableConfigurator.provideFullConfiguration(sessionsObservableList, sessionsTable);
         clientsTableConfigurator.provideConfiguration(clientsObservableList, clientsTable);
         engineersTableConfigurator.provideConfiguration(engineersObservableList, engineersTable);
@@ -130,24 +151,24 @@ public class OwnersDashboardController implements Initializable {
     public void cancelSession() {
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public void setUserInfo(String userInfo) {
-        this.userInfo.setText(userInfo);
+    @FXML
+    public void addEngineer() {
     }
 
     @FXML
-    private void refresh() {
-        sessionsTableConfigurator.provideFullConfiguration(sessionsObservableList, sessionsTable);
-        clientsTableConfigurator.provideConfiguration(clientsObservableList, clientsTable);
-        engineersTableConfigurator.provideConfiguration(engineersObservableList, engineersTable);
-        equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
-        initSessionsData();
-        initClientsData();
-        initEngineersData();
-        initEquipmentData();
+    public void deleteEngineer() {
+    }
+
+    @FXML
+    public void addEquipment() {
+    }
+
+    @FXML
+    public void deleteEquipment() {
+    }
+
+    @FXML
+    public void modifyEqQuantity() {
     }
 
     private void initSessionsData() {
