@@ -38,7 +38,7 @@
         </AnchorPane>
     </top>
     <center>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Wszystkie sesje">
                     <content>
@@ -46,7 +46,7 @@
                             <children>
                         <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <center>
-                                      <TableView fx:id="sessionsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="800.0">
+                                      <TableView fx:id="sessionsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0">
                                           <columns>
                                               <TableColumn fx:id="seshNameColumn" prefWidth="110.0" resizable="true" text="Sesja" />
                                               <TableColumn fx:id="seshClientColumn" prefWidth="110.0" resizable="true" text="Klient" />
@@ -87,27 +87,54 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="clientsTable" layoutX="300.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <columns>
-                                        <TableColumn fx:id="clientFullNameColumn" prefWidth="325.0" resizable="false" text="Imię i nazwisko" />
-                                        <TableColumn fx:id="clientEmailColumn" prefWidth="325.0" resizable="false" text="Email" />
-                                        <TableColumn fx:id="clientPhoneColumn" prefWidth="150.0" resizable="false" text="Numer telefonu" />
-                                    </columns>
-                                </TableView>
+                        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                                      <TableView fx:id="clientsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="409.0" prefWidth="800.0">
+                                          <columns>
+                                              <TableColumn fx:id="clientFullNameColumn" prefWidth="325.0" resizable="false" text="Imię i nazwisko" />
+                                              <TableColumn fx:id="clientEmailColumn" prefWidth="325.0" resizable="false" text="Email" />
+                                              <TableColumn fx:id="clientPhoneColumn" prefWidth="150.0" resizable="false" text="Numer telefonu" />
+                                          </columns>
+                                      </TableView>
+                           </center>
+                           <bottom>
+                              <AnchorPane prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER" />
+                           </bottom>
+                        </BorderPane>
                         </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Realizatorzy">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="engineersTable" layoutX="300.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <columns>
-                                        <TableColumn fx:id="engineerFullNameColumn" prefWidth="325.0" resizable="false" text="Imię i nazwisko" />
-                                        <TableColumn fx:id="engineerEmailColumn" prefWidth="325.0" resizable="false" text="Email" />
-                                        <TableColumn fx:id="engineerPhoneColumn" prefWidth="150.0" resizable="false" text="Numer telefonu" />
-                                    </columns>
-                                </TableView>
+                        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                                      <TableView fx:id="engineersTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0">
+                                          <columns>
+                                              <TableColumn fx:id="engineerFullNameColumn" prefWidth="325.0" resizable="false" text="Imię i nazwisko" />
+                                              <TableColumn fx:id="engineerEmailColumn" prefWidth="325.0" resizable="false" text="Email" />
+                                              <TableColumn fx:id="engineerPhoneColumn" prefWidth="150.0" resizable="false" text="Numer telefonu" />
+                                          </columns>
+                                      </TableView>
+                           </center>
+                           <bottom>
+                              <AnchorPane prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="addEngineerButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#addEngineer" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Dodaj realizatora" textFill="#b25900">
+                                       <font>
+                                          <Font name="SF Pro Display Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="deleteEngineerButton" layoutX="160.0" layoutY="24.0" mnemonicParsing="false" onAction="#deleteEngineer" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Usuń realizatora" textFill="#b25900">
+                                       <font>
+                                          <Font name="SF Pro Display Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </bottom>
+                        </BorderPane>
                             </children></AnchorPane>
                     </content>
                 </Tab>
