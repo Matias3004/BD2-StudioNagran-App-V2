@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.OwnersDashboardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.OwnersDashboardController">
     <top>
         <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="logoutButton" layoutX="686.0" layoutY="24.0" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;" text="Wyloguj" textAlignment="CENTER" textFill="#b25900">
+                <Button fx:id="logoutButton" layoutX="686.0" layoutY="24.0" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #b25900;" text="Wyloguj" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="SF Pro Display Bold" size="14.0" />
                     </font>
@@ -61,17 +55,17 @@
                            <bottom>
                               <AnchorPane prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
                                  <children>
-                                        <Button fx:id="scheduleSessionButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#scheduleSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Zaplanuj Sesję" textFill="#b25900">
+                                        <Button fx:id="scheduleSessionButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#scheduleSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Zaplanuj sesję" textFill="#b25900">
                                             <font>
                                                 <Font name="SF Pro Display Bold" size="14.0" />
                                             </font>
                                         </Button>
-                                    <Button fx:id="modifySessionButton" layoutX="160.0" layoutY="24.0" mnemonicParsing="false" onAction="#modifySession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Modyfikuj Sesję" textFill="#b25900">
+                                    <Button fx:id="modifySessionButton" layoutX="160.0" layoutY="24.0" mnemonicParsing="false" onAction="#modifySession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Modyfikuj sesję" textFill="#b25900">
                                        <font>
                                           <Font name="SF Pro Display Bold" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="cancelSessionButton" layoutX="306.0" layoutY="24.0" mnemonicParsing="false" onAction="#cancelSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Odwołaj Sesję" textFill="#b25900">
+                                    <Button fx:id="cancelSessionButton" layoutX="306.0" layoutY="24.0" mnemonicParsing="false" onAction="#cancelSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Odwołaj sesję" textFill="#b25900">
                                        <font>
                                           <Font name="SF Pro Display Bold" size="14.0" />
                                        </font>
@@ -142,13 +136,38 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="equipmentTable" layoutX="300.0" layoutY="105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <columns>
-                                        <TableColumn fx:id="eqNameColumn" prefWidth="400.0" resizable="false" text="Nazwa" />
-                                        <TableColumn fx:id="eqTypeColumn" prefWidth="300.0" resizable="false" text="Rodzaj Sprzętu" />
-                                        <TableColumn fx:id="eqQuantityColumn" prefWidth="100.0" resizable="false" text="Ilość" />
-                                    </columns>
-                                </TableView>
+                        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                                      <TableView fx:id="equipmentTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0">
+                                          <columns>
+                                              <TableColumn fx:id="eqNameColumn" prefWidth="400.0" resizable="false" text="Nazwa" />
+                                              <TableColumn fx:id="eqTypeColumn" prefWidth="300.0" resizable="false" text="Rodzaj Sprzętu" />
+                                              <TableColumn fx:id="eqQuantityColumn" prefWidth="100.0" resizable="false" text="Ilość" />
+                                          </columns>
+                                      </TableView>
+                           </center>
+                           <bottom>
+                              <AnchorPane prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="addEquipmentButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#addEquipment" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #EEEEEE;" text="Dodaj wyposażenie" textFill="#b25900">
+                                       <font>
+                                          <Font name="SF Pro Display Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="deleteEquipmentButton" layoutX="178.0" layoutY="24.0" mnemonicParsing="false" onAction="#deleteEquipment" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #EEEEEE;" text="Usuń wyposażenie" textFill="#b25900">
+                                       <font>
+                                          <Font name="SF Pro Display Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="modifyEqQuantityButton" layoutX="342.0" layoutY="24.0" mnemonicParsing="false" onAction="#modifyEqQuantity" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #EEEEEE;" text="Modyfikuj ilość" textFill="#b25900">
+                                       <font>
+                                          <Font name="SF Pro Display Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </bottom>
+                        </BorderPane>
                             </children>
                         </AnchorPane>
                     </content>
