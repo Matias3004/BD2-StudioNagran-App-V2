@@ -61,6 +61,7 @@ public class LoginController {
                         ClientsDashboardController clientsDashboardController = (ClientsDashboardController)
                                 SceneCreator.createScene("gui/client-dashboard.fxml", 800, 600);
                         assert clientsDashboardController != null;
+                        clientsDashboardController.setUserId(userInfoProvider.getId());
                         clientsDashboardController.setUserInfo(userInfoProvider.getName());
                         quit();
                     }

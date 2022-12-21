@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class OwnersDashboardController implements Initializable {
