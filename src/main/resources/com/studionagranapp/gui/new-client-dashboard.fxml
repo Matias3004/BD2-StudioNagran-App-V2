@@ -87,10 +87,10 @@
                   <Font name="SF Pro Display Bold" size="18.0" />
                </font>
             </Label>
-            <TableView layoutX="1.0" layoutY="183.0" prefHeight="257.0" prefWidth="400.0">
+            <TableView fx:id="equipmentTable" layoutX="1.0" layoutY="183.0" prefHeight="257.0" prefWidth="400.0">
               <columns>
-                <TableColumn editable="false" prefWidth="200.0" text="Nazwa" />
-                <TableColumn prefWidth="200.0" text="Rodzaj Sprzętu" />
+                <TableColumn fx:id="eqNameColumn" editable="false" prefWidth="200.0" text="Nazwa" />
+                <TableColumn fx:id="eqTypeColumn" prefWidth="200.0" text="Rodzaj Sprzętu" />
               </columns>
             </TableView>
             <Label layoutX="149.0" layoutY="147.0" text="Nasz sprzęt:">

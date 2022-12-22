@@ -16,7 +16,7 @@ public class EquipmentTableConfigurator {
             DatabaseManager databaseManager = DatabaseManager.getInstance();
             equipmentObservableList.clear();
 
-            String query =  "SELECT * FROM Studio_nagran.Equipment";
+            String query =  "SELECT * FROM Equipment";
             ResultSet equipment = databaseManager.executeQuery(query);
 
             while (equipment.next()) {
@@ -40,7 +40,7 @@ public class EquipmentTableConfigurator {
             DatabaseManager databaseManager = DatabaseManager.getInstance();
             equipmentObservableList.clear();
 
-            String query = "SELECT * FROM Studio_nagran.Equipment WHERE backline = 1";
+            String query = "SELECT * FROM Equipment WHERE backline = 1";
             ResultSet equipment = databaseManager.executeQuery(query);
 
             while (equipment.next()) {
