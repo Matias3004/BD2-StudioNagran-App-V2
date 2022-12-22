@@ -7,13 +7,17 @@ public class MixNote {
     private final Integer id;
     private final Date uploadDate;
     private final String description;
-    private final Integer mixId;
+    private final String filename;
+    private final String sessionName;
+    private final String bandName;
 
-    public MixNote(Integer id, Date uploadDate, String description, Integer mixId) {
+    public MixNote(Integer id, Date uploadDate, String description, String filename, String sessionName, String bandName) {
         this.id = id;
         this.uploadDate = uploadDate;
         this.description = description;
-        this.mixId = mixId;
+        this.filename = filename;
+        this.sessionName = sessionName;
+        this.bandName = bandName;
     }
 
     public Integer getId() {
@@ -28,7 +32,15 @@ public class MixNote {
         return description;
     }
 
-    public Integer getMixId() {
-        return mixId;
+    public String getFilename() {
+        return filename;
+    }
+
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public String getBandName() {
+        return bandName;
     }
 }
