@@ -8,14 +8,16 @@ public class Mix {
     private final String filename;
     private final Date uploadDate;
     private final String path;
-    private final Integer sessionId;
+    private final String sessionName;
+    private final String bandName;
 
-    public Mix(Integer id, String filename, Date uploadDate, String path, Integer sessionId) {
+    public Mix(Integer id, String filename, Date uploadDate, String path, String sessionName, String bandName) {
         this.id = id;
         this.filename = filename;
         this.uploadDate = uploadDate;
         this.path = path;
-        this.sessionId = sessionId;
+        this.sessionName = sessionName;
+        this.bandName = bandName;
     }
 
     public Integer getId() {
@@ -34,7 +36,11 @@ public class Mix {
         return path;
     }
 
-    public Integer getSessionId() {
-        return sessionId;
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public String getBandName() {
+        return bandName;
     }
 }
