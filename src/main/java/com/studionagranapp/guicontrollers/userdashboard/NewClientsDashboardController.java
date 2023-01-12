@@ -1,5 +1,6 @@
 package com.studionagranapp.guicontrollers.userdashboard;
 
+import com.studionagranapp.helpers.configurators.choiceboxconfigurators.EngineersChoiceBoxConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
@@ -12,6 +13,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,6 +30,8 @@ public class NewClientsDashboardController implements Initializable {
     private Button returnButton;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private ChoiceBox<String> engineersChoiceBox;
 
     @FXML
     private TableView<Equipment> equipmentTable;
@@ -39,17 +43,20 @@ public class NewClientsDashboardController implements Initializable {
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
 
     private final DatabaseManager databaseManager;
+    private final EngineersChoiceBoxConfigurator engineersChoiceBoxConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
     private final AlertManager alertManager;
 
     public NewClientsDashboardController() {
         databaseManager = DatabaseManager.getInstance();
+        engineersChoiceBoxConfigurator = new EngineersChoiceBoxConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initEngineersChoiceBox();
         equipmentTableConfigurator.provideClientConfiguration(equipmentObservableList, equipmentTable);
         initEquipmentData();
     }
@@ -64,6 +71,11 @@ public class NewClientsDashboardController implements Initializable {
     @FXML
     private void bookSession() {
         System.out.println("Sesja zarezerwowana!");
+    }
+
+    private void initEngineersChoiceBox() {
+        String query = "SELECT * FROM User_accounts WHERE role = 'ENGINEER'";
+        engineersChoiceBoxConfigurator.initValues(query, engineersChoiceBox);
     }
 
     private void initEquipmentData() {

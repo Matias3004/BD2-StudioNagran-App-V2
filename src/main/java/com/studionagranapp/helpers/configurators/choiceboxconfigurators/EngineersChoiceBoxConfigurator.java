@@ -6,7 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EngineerChoiceBoxConfigurator {
+public class EngineersChoiceBoxConfigurator {
 
     public void initValues(String query, ChoiceBox<String> engineerChoiceBox) {
         try {
@@ -25,7 +25,6 @@ public class EngineerChoiceBoxConfigurator {
 
     private String engineerRepresentation(ResultSet engineers) throws SQLException {
         return engineers.getString("first_name") + " "
-                + engineers.getString("last_name") + "/"
-                + engineers.getString("email");
+                + engineers.getString("last_name");
     }
 }
