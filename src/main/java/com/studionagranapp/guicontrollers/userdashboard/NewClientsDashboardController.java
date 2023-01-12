@@ -4,6 +4,7 @@ import com.studionagranapp.helpers.configurators.choiceboxconfigurators.Engineer
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
+import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.models.Equipment;
 import javafx.collections.FXCollections;
@@ -12,10 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -30,8 +28,29 @@ public class NewClientsDashboardController implements Initializable {
     private Button returnButton;
     @FXML
     private BorderPane borderPane;
+
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField surnameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField phoneField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private TextField bandField;
+    @FXML
+    private TextField sessionField;
     @FXML
     private ChoiceBox<String> engineersChoiceBox;
+    @FXML
+    private DatePicker startDateField;
+    @FXML
+    private DatePicker endDateField;
 
     @FXML
     private TableView<Equipment> equipmentTable;
@@ -45,7 +64,7 @@ public class NewClientsDashboardController implements Initializable {
     private final DatabaseManager databaseManager;
     private final EngineersChoiceBoxConfigurator engineersChoiceBoxConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
-    private final AlertManager alertManager;
+    private AlertManager alertManager;
 
     public NewClientsDashboardController() {
         databaseManager = DatabaseManager.getInstance();
@@ -69,8 +88,49 @@ public class NewClientsDashboardController implements Initializable {
     }
 
     @FXML
-    private void bookSession() {
-        System.out.println("Sesja zarezerwowana!");
+    private void scheduleSession() {
+        if (isDataFieldsBlank()) {
+            DatabaseResponse newClientResult = databaseManager
+                    .insertClient(nameField.getText(),
+                            surnameField.getText(),
+                            usernameField.getText(),
+                            passwordField.getText(),
+                            emailField.getText(),
+                            phoneField.getText());
+            DatabaseResponse newSessionResult = databaseManager
+                    .insertSession(sessionField.getText(),
+                            bandField.getText(),
+                            startDateField.getValue(),
+                            endDateField.getValue(),
+                            usernameField.getText(),
+                            engineersChoiceBox.getValue());
+            if (newClientResult == DatabaseResponse.SUCCESS && newSessionResult == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Sesja zarezerwowana pomyslnie!");
+                goBack();
+            }
+        } else {
+            alertManager.throwError("Błąd zapisu danych do bazy.");
+        }
+    }
+
+    private boolean isDataFieldsBlank() {
+        try {
+            return !nameField.getText().isBlank() &&
+                    !surnameField.getText().isBlank() &&
+                    !emailField.getText().isBlank() &&
+                    !phoneField.getText().isBlank() &&
+                    !usernameField.getText().isBlank() &&
+                    !passwordField.getText().isBlank() &&
+                    !bandField.getText().isBlank() &&
+                    !sessionField.getText().isBlank() &&
+                    !engineersChoiceBox.getValue().isBlank();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void setAlertManager(AlertManager alertManager) {
+        this.alertManager = alertManager;
     }
 
     private void initEngineersChoiceBox() {
