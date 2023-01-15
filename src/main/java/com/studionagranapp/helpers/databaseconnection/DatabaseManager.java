@@ -43,16 +43,9 @@ public class DatabaseManager {
     }
 
     private DatabaseResponse performDeletion(String query) {
-        String fkOffQuery = "SET FOREIGN_KEY_CHECKS = 0";
-        String fkOnQuery = "SET FOREIGN_KEY_CHECKS = 1";
         try {
-            PreparedStatement preparedFkOffStatement = getConnection().prepareStatement(fkOffQuery);
-            PreparedStatement preparedFkOnStatement = getConnection().prepareStatement(fkOnQuery);
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
-
-            preparedFkOffStatement.execute();
             preparedStatement.execute();
-            preparedFkOnStatement.execute();
 
             return DatabaseResponse.SUCCESS;
         } catch (SQLException ex) {
