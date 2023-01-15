@@ -77,7 +77,9 @@ public class NewSessionDashboardController implements Initializable {
             if (newSessionResult == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Sesja zarezerwowana pomyslnie!");
                 goBack();
-            } else
+            } else if (newSessionResult == DatabaseResponse.SESSION_DATE_OCCUPIED)
+                alertManager.throwError("Wybrany termin jest zajęty!");
+            else
                 alertManager.throwError("Istnieje już sesja o tej samej nazwie!");
         } else {
             alertManager.throwError("Błąd zapisu danych do bazy!");

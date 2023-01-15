@@ -86,6 +86,9 @@ public class DatabaseManager {
     }
 
     public DatabaseResponse insertSession(String sessionName, String bandName, LocalDate startDate, LocalDate endDate, Integer Clients_id, String engineer) {
+        String getSessionsQuery = "SELECT * FROM Sessions";
+        ResultSet sessions = queryExecutor.executeQuery(getSessionsQuery);
+
         String engineerFirstName = engineer.split(" ")[0];
         String engineerLastName = engineer.split(" ")[1];
 
@@ -99,7 +102,12 @@ public class DatabaseManager {
         Timestamp end_date = Timestamp.valueOf(endDate + " 18:00:00");
 
         try {
-            Integer Engineer_id = 0;
+            while (sessions.next()) {
+                if (checkIfSessionDateIsOccupied(sessions, start_date, end_date))
+                    return DatabaseResponse.SESSION_DATE_OCCUPIED;
+            }
+
+            int Engineer_id = 0;
             if (engineerID.next()) {
                 Engineer_id = engineerID.getInt("account_id");
             }
@@ -135,6 +143,7 @@ public class DatabaseManager {
                 if (checkIfSessionDateIsOccupied(sessions, newStartDate_ts, newEndDate_ts))
                     return DatabaseResponse.SESSION_DATE_OCCUPIED;
             }
+
             String updateSessionDateQuery = "UPDATE Sessions SET start_date = (?), end_date = (?) WHERE id = (?)";
             try {
                 PreparedStatement preparedStatement = getConnection().prepareStatement(updateSessionDateQuery);
@@ -159,7 +168,7 @@ public class DatabaseManager {
         Timestamp startDate = sessions.getTimestamp("start_date");
         Timestamp endDate = sessions.getTimestamp("end_date");
 
-        return newStartDate.after(startDate) || newStartDate.before(endDate);
+        return newStartDate.after(startDate) && newStartDate.before(endDate);
     }
 
     public DatabaseResponse updateEquipmentQuantity(Integer id, String newQuantity) {

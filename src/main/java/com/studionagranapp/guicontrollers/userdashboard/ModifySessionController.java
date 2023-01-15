@@ -50,9 +50,9 @@ public class ModifySessionController {
             if (result == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Pomyslnie zmieniono sesję!");
                 close();
-            } else if (result == DatabaseResponse.SESSION_DATE_OCCUPIED) {
+            } else if (result == DatabaseResponse.SESSION_DATE_OCCUPIED)
                 alertManager.throwError("Wybrany termin jest zajęty!");
-            } else
+            else
                 alertManager.throwError("Wystąpił błąd podczas modyfikacji sesji");
         } else {
             alertManager.throwError("Podaj nowe daty!");
