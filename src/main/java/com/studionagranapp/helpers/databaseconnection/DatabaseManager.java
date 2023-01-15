@@ -8,6 +8,7 @@ import com.studionagranapp.helpers.query.QueryExecutor;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -172,6 +173,35 @@ public class DatabaseManager {
         return newStartDate.after(startDate) && newStartDate.before(endDate);
     }
 
+    public DatabaseResponse insertMix(String filename, String path, String sessionName) {
+        String getSessionIdQuery = "SELECT id FROM Sessions WHERE session_name = '" + sessionName + "'";
+        ResultSet sessionID = queryExecutor.executeQuery(getSessionIdQuery);
+
+        try {
+            int session_id = 0;
+            if (sessionID.next())
+                session_id = sessionID.getInt("id");
+
+            String addMixQuery = "INSERT INTO Mixes (filename, upload_date, path, Session_id) VALUES (?,?,?,?)";
+            try {
+                PreparedStatement preparedMix = getConnection().prepareStatement(addMixQuery);
+                preparedMix.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+
+                return getDatabaseResponse(filename, path, session_id, preparedMix);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                e.getCause();
+
+                return DatabaseResponse.ERROR;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getCause();
+
+            return DatabaseResponse.ERROR;
+        }
+    }
+
     public DatabaseResponse insertEquipment(String eqName, String eqType, String eqQuantity, String backline) {
         int isBackline = 0;
         if (backline.equals("Tak"))
@@ -238,6 +268,15 @@ public class DatabaseManager {
         preparedStatement.setTimestamp(2, newEndDate);
         preparedStatement.setInt(3, sessionID);
         preparedStatement.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
+    private DatabaseResponse getDatabaseResponse(String filename, String path, Integer session_id, PreparedStatement preparedMix) throws SQLException {
+        preparedMix.setString(1, filename);
+        preparedMix.setString(3, path);
+        preparedMix.setInt(4, session_id);
+        preparedMix.execute();
 
         return DatabaseResponse.SUCCESS;
     }

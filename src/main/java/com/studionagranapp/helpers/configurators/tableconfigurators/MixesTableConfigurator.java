@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class MixesTableConfigurator {
 
-    public void provideEngineerConfguration(ObservableList<Mix> mixesObservableList,
-                                    TableView<Mix> mixesTable, Integer userId) {
+    public void provideEngineerConfiguration(ObservableList<Mix> mixesObservableList,
+                                             TableView<Mix> mixesTable, Integer id) {
         try {
             DatabaseManager databaseManager = DatabaseManager.getInstance();
             mixesObservableList.clear();
@@ -20,18 +20,18 @@ public class MixesTableConfigurator {
                     "Mixes.filename, " +
                     "Mixes.upload_date, " +
                     "Mixes.path, " +
-                    "Session.name as session_name, " +
+                    "Session.session_name, " +
                     "Session.band_name " +
                     "FROM Mixes " +
                     "JOIN Sessions as Session " +
-                    "ON Session.id = Mixes.Session_id" +
-                    "WHERE Session.Engineer_id = " + userId;
+                    "ON Session.id = Mixes.Session_id " +
+                    "WHERE Session.Engineer_id = " + id;
             ResultSet mixes = databaseManager.executeQuery(query);
 
             while (mixes.next()) {
                 mixesObservableList.add(new Mix(
                         mixes.getInt("id"),
-                        mixes.getString("fileame"),
+                        mixes.getString("filename"),
                         mixes.getDate("upload_date"),
                         mixes.getString("path"),
                         mixes.getString("session_name"),
@@ -44,8 +44,8 @@ public class MixesTableConfigurator {
         }
     }
 
-    public void provideClientConfguration(ObservableList<Mix> mixesObservableList,
-                                            TableView<Mix> mixesTable, Integer userId) {
+    public void provideClientConfiguration(ObservableList<Mix> mixesObservableList,
+                                           TableView<Mix> mixesTable, Integer userId) {
         try {
             DatabaseManager databaseManager = DatabaseManager.getInstance();
             mixesObservableList.clear();
@@ -54,7 +54,7 @@ public class MixesTableConfigurator {
                     "Mixes.filename, " +
                     "Mixes.upload_date, " +
                     "Mixes.path, " +
-                    "Session.name as session_name, " +
+                    "Session.session_name, " +
                     "Session.band_name as session_band " +
                     "FROM Mixes " +
                     "JOIN Sessions as Session " +
@@ -65,7 +65,7 @@ public class MixesTableConfigurator {
             while (mixes.next()) {
                 mixesObservableList.add(new Mix(
                         mixes.getInt("id"),
-                        mixes.getString("fileame"),
+                        mixes.getString("filename"),
                         mixes.getDate("upload_date"),
                         mixes.getString("path"),
                         mixes.getString("session_name"),
