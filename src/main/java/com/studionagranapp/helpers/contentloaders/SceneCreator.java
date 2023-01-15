@@ -13,7 +13,6 @@ public class SceneCreator {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(GUIFormFilepath));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.show();
 
