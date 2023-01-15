@@ -181,6 +181,19 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void deleteEngineer() {
+        try {
+            User engineer = engineersTable.getSelectionModel().getSelectedItem();
+
+            DatabaseResponse result = databaseManager.delete(engineer);
+            if (result == DatabaseResponse.ERROR)
+                alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy");
+            else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Realizator usunięty pomyslnie!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnego realizatora z listy!");
+        }
     }
 
     @FXML
@@ -194,7 +207,7 @@ public class OwnersDashboardController implements Initializable {
 
             DatabaseResponse result = databaseManager.delete(equipment);
             if (result == DatabaseResponse.ERROR)
-                alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy.");
+                alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy");
             else if (result == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Sprzęt usunięty pomyslnie!");
                 refresh();

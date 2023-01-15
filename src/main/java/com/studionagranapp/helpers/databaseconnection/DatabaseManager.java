@@ -3,6 +3,7 @@ package com.studionagranapp.helpers.databaseconnection;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.models.Equipment;
 import com.studionagranapp.helpers.models.Session;
+import com.studionagranapp.helpers.models.User;
 import com.studionagranapp.helpers.query.QueryExecutor;
 
 import java.sql.*;
@@ -42,9 +43,16 @@ public class DatabaseManager {
     }
 
     private DatabaseResponse performDeletion(String query) {
+        String fkOffQuery = "SET FOREIGN_KEY_CHECKS = 0";
+        String fkOnQuery = "SET FOREIGN_KEY_CHECKS = 1";
         try {
+            PreparedStatement preparedFkOffStatement = getConnection().prepareStatement(fkOffQuery);
+            PreparedStatement preparedFkOnStatement = getConnection().prepareStatement(fkOnQuery);
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            preparedFkOffStatement.execute();
             preparedStatement.execute();
+            preparedFkOnStatement.execute();
 
             return DatabaseResponse.SUCCESS;
         } catch (SQLException ex) {
@@ -232,6 +240,12 @@ public class DatabaseManager {
 
     public DatabaseResponse delete(Session session) {
         String deleteQuery = "DELETE FROM Sessions WHERE id = " + session.getId();
+
+        return performDeletion(deleteQuery);
+    }
+
+    public DatabaseResponse delete(User engineer) {
+        String deleteQuery = "DELETE FROM User_accounts WHERE account_id = " + engineer.getAccountId();
 
         return performDeletion(deleteQuery);
     }
