@@ -1,6 +1,7 @@
 package com.studionagranapp.helpers.databaseconnection;
 
 import com.studionagranapp.helpers.errorhandling.AlertManager;
+import com.studionagranapp.helpers.models.Session;
 import com.studionagranapp.helpers.query.QueryExecutor;
 
 import java.sql.*;
@@ -83,11 +84,7 @@ public class DatabaseManager {
         }
     }
 
-    public DatabaseResponse insertSession(String session_name, String band_name, LocalDate start_date, LocalDate end_date, String client, String engineer) {
-        String getClientsIdQuery = "SELECT account_id FROM User_accounts " +
-                "WHERE username = '" + client + "'";
-        ResultSet clientID = queryExecutor.executeQuery(getClientsIdQuery);
-
+    public DatabaseResponse insertSession(String sessionName, String bandName, LocalDate startDate, LocalDate endDate, Integer Clients_id, String engineer) {
         String engineerFirstName = engineer.split(" ")[0];
         String engineerLastName = engineer.split(" ")[1];
 
@@ -96,16 +93,13 @@ public class DatabaseManager {
                 "' AND last_name = '" + engineerLastName + "'";
         ResultSet engineerID = queryExecutor.executeQuery(getEngineerIdQuery);
 
-        Integer duration = 8 * (int) ChronoUnit.DAYS.between(start_date, end_date);
-        Timestamp start_date_ts = Timestamp.valueOf(start_date.toString() + " 10:00:00");
-        Timestamp end_date_ts = Timestamp.valueOf(end_date.toString() + " 18:00:00");
+        Integer duration = 8 * (int) ChronoUnit.DAYS.between(startDate, endDate);
+        Timestamp start_date = Timestamp.valueOf(startDate + " 10:00:00");
+        Timestamp end_date = Timestamp.valueOf(endDate + " 18:00:00");
 
         try {
-            Integer Clients_id = 0;
             Integer Engineer_id = 0;
-
-            if (clientID.next() && engineerID.next()) {
-                Clients_id = clientID.getInt("account_id");
+            if (engineerID.next()) {
                 Engineer_id = engineerID.getInt("account_id");
             }
 
@@ -113,7 +107,7 @@ public class DatabaseManager {
             try {
                 PreparedStatement preparedSession = getConnection().prepareStatement(addSessionQuery);
 
-                return getDatabaseResponse(session_name, band_name, start_date_ts, end_date_ts, duration, Clients_id, Engineer_id, preparedSession);
+                return getDatabaseResponse(sessionName, bandName, start_date, end_date, duration, Clients_id, Engineer_id, preparedSession);
             } catch (SQLException e) {
                 e.printStackTrace();
                 e.getCause();
@@ -152,5 +146,11 @@ public class DatabaseManager {
         preparedSession.execute();
 
         return DatabaseResponse.SUCCESS;
+    }
+
+    public DatabaseResponse delete(Session session) {
+        String deleteQuery = "DELETE FROM Sessions WHERE id = " + session.getId();
+
+        return performDeletion(deleteQuery);
     }
 }

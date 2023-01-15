@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.NewSessionDashboardController">
+    <top>
+        <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="returnButton" layoutX="686.0" layoutY="24.0" mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;" text="Powrót" textAlignment="CENTER" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Label layoutX="14.0" layoutY="26.0" text="Rezerwacja sesji nagraniowej">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#scheduleSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Zarezerwuj Sesję" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children></AnchorPane>
+    </bottom>
+   <center>
+        <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="sessionNameField" layoutX="194.0" layoutY="23.0" prefWidth="360.0" promptText="Nazwa sesji" />
+                <Label layoutX="194.0" layoutY="6.0" text="Nazwa sesji">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="engineersChoiceBox" layoutX="194.0" layoutY="274.0" prefWidth="360.0" />
+                <Label layoutX="194.0" layoutY="257.0" text="Wybierz realizatora:">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="bandNameField" layoutX="194.0" layoutY="66.0" prefWidth="360.0" promptText="Zespół/wykonawca" />
+                <Label layoutX="194.0" layoutY="49.0" text="Nazwa zespołu/wykonawcy">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="194.0" layoutY="114.0" text="Wybierz datę roczpoczęcia:">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="18.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="startDateField" layoutX="194.0" layoutY="137.0" prefHeight="24.0" prefWidth="360.0" promptText="DD.MM.YYYY" />
+                <Label layoutX="194.0" layoutY="188.0" text="Wybierz datę zakończenia:">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="18.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="endDateField" layoutX="194.0" layoutY="211.0" prefHeight="24.0" prefWidth="360.0" promptText="DD.MM.YYYY" />
+            </children>
+        </AnchorPane>
+   </center>
+</BorderPane>

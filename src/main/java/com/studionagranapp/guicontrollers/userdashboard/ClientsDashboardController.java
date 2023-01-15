@@ -3,6 +3,7 @@ package com.studionagranapp.guicontrollers.userdashboard;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
+import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.models.Equipment;
@@ -23,6 +24,8 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class ClientsDashboardController implements Initializable {
@@ -90,15 +93,40 @@ public class ClientsDashboardController implements Initializable {
     }
 
     @FXML
-    public void logout() {
+    private void logout() {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
         SceneCreator.createScene("gui/login-panel.fxml", 800, 600);
     }
 
     @FXML
-    public void bookSession() {
+    private void bookSession() {
+        NewSessionDashboardController newSessionDashboardController = (NewSessionDashboardController)
+                SceneCreator.createScene("gui/new-session-dashboard.fxml", 800, 600);
+        assert newSessionDashboardController != null;
+        newSessionDashboardController.setUserID(userId);
+        newSessionDashboardController.setAlertManager(alertManager);
+    }
 
+    @FXML
+    private void cancelSession() {
+        try {
+            Session session = mySessionsTable.getSelectionModel().getSelectedItem();
+            if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 7) {
+                alertManager.throwError("Nie możesz odwołać sesji na mniej niż tydzień przed zaplanowanym terminem!");
+
+                return;
+            }
+            DatabaseResponse result = databaseManager.delete(session);
+            if (result == DatabaseResponse.ERROR) {
+                alertManager.throwError("Wystąpił błąd podczas usuwania sesji.");
+            } else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Wystąpił błąd podczas usuwania sesji. Zaznacz w tabeli sesję, którą chcesz odwołać!");
+        }
     }
 
     @FXML
