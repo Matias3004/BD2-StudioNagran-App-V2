@@ -104,7 +104,7 @@ public class SessionsTableConfigurator {
             sessionsObservableList.clear();
 
             String query = "SELECT Sessions.id, " +
-                    "Sessions.name, " +
+                    "Sessions.session_name, " +
                     "Sessions.band_name, " +
                     "Sessions.start_date, " +
                     "Sessions.end_date, " +
@@ -124,7 +124,7 @@ public class SessionsTableConfigurator {
             while (sessions.next()) {
                 sessionsObservableList.add(new Session(
                         sessions.getInt("id"),
-                        sessions.getString("name"),
+                        sessions.getString("session_name"),
                         sessions.getString("band_name"),
                         sessions.getDate("start_date"),
                         sessions.getDate("end_date"),
