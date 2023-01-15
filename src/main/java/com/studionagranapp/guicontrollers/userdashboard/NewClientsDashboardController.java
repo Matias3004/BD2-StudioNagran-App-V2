@@ -27,9 +27,6 @@ public class NewClientsDashboardController implements Initializable {
     @FXML
     private Button returnButton;
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
     private TextField nameField;
     @FXML
     private TextField surnameField;
@@ -41,16 +38,6 @@ public class NewClientsDashboardController implements Initializable {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
-    @FXML
-    private TextField bandField;
-    @FXML
-    private TextField sessionField;
-    @FXML
-    private ChoiceBox<String> engineersChoiceBox;
-    @FXML
-    private DatePicker startDateField;
-    @FXML
-    private DatePicker endDateField;
 
     @FXML
     private TableView<Equipment> equipmentTable;
@@ -62,20 +49,17 @@ public class NewClientsDashboardController implements Initializable {
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
 
     private final DatabaseManager databaseManager;
-    private final EngineersChoiceBoxConfigurator engineersChoiceBoxConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
-    private AlertManager alertManager;
+    private final AlertManager alertManager;
 
     public NewClientsDashboardController() {
         databaseManager = DatabaseManager.getInstance();
-        engineersChoiceBoxConfigurator = new EngineersChoiceBoxConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initEngineersChoiceBox();
         equipmentTableConfigurator.provideClientConfiguration(equipmentObservableList, equipmentTable);
         initEquipmentData();
     }
@@ -88,29 +72,23 @@ public class NewClientsDashboardController implements Initializable {
     }
 
     @FXML
-    private void scheduleSession() {
+    private void registerUser() {
         if (isDataFieldsBlank()) {
             DatabaseResponse newClientResult = databaseManager
                     .insertClient(nameField.getText(),
                             surnameField.getText(),
                             usernameField.getText(),
                             passwordField.getText(),
+                            "CLIENT",
                             emailField.getText(),
                             phoneField.getText());
-            DatabaseResponse newSessionResult = databaseManager
-                    .insertSession(sessionField.getText(),
-                            bandField.getText(),
-                            startDateField.getValue(),
-                            endDateField.getValue(),
-                            usernameField.getText(),
-                            engineersChoiceBox.getValue());
-            if (newClientResult == DatabaseResponse.SUCCESS && newSessionResult == DatabaseResponse.SUCCESS) {
+            if (newClientResult == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Sesja zarezerwowana pomyslnie!");
                 goBack();
-            }
-        } else {
-            alertManager.throwError("Błąd zapisu danych do bazy.");
-        }
+            } else
+                alertManager.throwError("Istnieje już użytkownik o wybranej nazwie!");
+        } else
+            alertManager.throwError("Błąd zapisu danych do bazy!");
     }
 
     private boolean isDataFieldsBlank() {
@@ -120,22 +98,10 @@ public class NewClientsDashboardController implements Initializable {
                     !emailField.getText().isBlank() &&
                     !phoneField.getText().isBlank() &&
                     !usernameField.getText().isBlank() &&
-                    !passwordField.getText().isBlank() &&
-                    !bandField.getText().isBlank() &&
-                    !sessionField.getText().isBlank() &&
-                    !engineersChoiceBox.getValue().isBlank();
+                    !passwordField.getText().isBlank();
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public void setAlertManager(AlertManager alertManager) {
-        this.alertManager = alertManager;
-    }
-
-    private void initEngineersChoiceBox() {
-        String query = "SELECT * FROM User_accounts WHERE role = 'ENGINEER'";
-        engineersChoiceBoxConfigurator.initValues(query, engineersChoiceBox);
     }
 
     private void initEquipmentData() {

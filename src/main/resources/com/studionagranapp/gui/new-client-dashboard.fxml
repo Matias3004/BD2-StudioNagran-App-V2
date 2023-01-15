@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController">
     <top>
         <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
             <children>
@@ -13,7 +13,7 @@
                         <Font name="SF Pro Display Bold" size="14.0" />
                     </font>
                 </Button>
-                <Label layoutX="14.0" layoutY="26.0" text="Rezerwacja Pierwszej Sesji">
+                <Label layoutX="14.0" layoutY="26.0" text="Rejestracja nowego użytkownika">
                     <font>
                         <Font name="SF Pro Display Bold" size="24.0" />
                     </font>
@@ -24,7 +24,7 @@
     <bottom>
         <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="scheduleButton" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#scheduleSession" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Zarezerwuj Sesję" textFill="#b25900">
+                <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Utwórz konto" textFill="#b25900">
                     <font>
                         <Font name="SF Pro Display Bold" size="14.0" />
                     </font>
@@ -58,24 +58,6 @@
                   <Font name="SF Pro Display Regular" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="sessionField" layoutX="14.0" layoutY="350.0" prefWidth="360.0" promptText="Nazwa sesji" />
-            <Label layoutX="14.0" layoutY="329.0" text="Nazwa sesji">
-               <font>
-                  <Font name="SF Pro Display Regular" size="13.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="engineersChoiceBox" layoutX="14.0" layoutY="397.0" prefWidth="360.0" />
-            <Label layoutX="14.0" layoutY="376.0" text="Wybierz realizatora:">
-               <font>
-                  <Font name="SF Pro Display Regular" size="13.0" />
-               </font>
-            </Label>
-            <TextField fx:id="bandField" layoutX="14.0" layoutY="303.0" prefWidth="360.0" promptText="Zespół/wykonawca" />
-            <Label layoutX="14.0" layoutY="282.0" text="Nazwa zespołu/wykonawcy">
-               <font>
-                  <Font name="SF Pro Display Regular" size="13.0" />
-               </font>
-            </Label>
             <TextField fx:id="surnameField" layoutX="14.0" layoutY="68.0" prefHeight="24.0" prefWidth="360.0" promptText="Nazwisko" />
             <Label layoutX="14.0" layoutY="47.0" text="Nazwisko">
                <font>
@@ -94,29 +76,17 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <DatePicker fx:id="startDateField" layoutX="21.0" layoutY="39.0" prefHeight="24.0" prefWidth="360.0" promptText="DD.MM.YYYY" />
-            <Label layoutX="87.0" layoutY="3.0" text="Wybierz datę roczpoczęcia:">
-               <font>
-                  <Font name="SF Pro Display Bold" size="18.0" />
-               </font>
-            </Label>
-            <TableView fx:id="equipmentTable" layoutX="1.0" layoutY="183.0" prefHeight="257.0" prefWidth="400.0">
+            <TableView fx:id="equipmentTable" layoutX="1.0" layoutY="51.0" prefHeight="389.0" prefWidth="400.0">
               <columns>
                 <TableColumn fx:id="eqNameColumn" editable="false" prefWidth="200.0" text="Nazwa" />
                 <TableColumn fx:id="eqTypeColumn" prefWidth="200.0" text="Rodzaj Sprzętu" />
               </columns>
             </TableView>
-            <Label layoutX="149.0" layoutY="147.0" text="Nasz sprzęt:">
+            <Label layoutX="155.0" layoutY="14.0" text="Nasz sprzęt:">
                <font>
                   <Font name="SF Pro Display Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="91.0" layoutY="75.0" text="Wybierz datę zakończenia:">
-               <font>
-                  <Font name="SF Pro Display Bold" size="18.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="endDateField" layoutX="21.0" layoutY="111.0" prefHeight="24.0" prefWidth="360.0" promptText="DD.MM.YYYY" />
          </children>
       </AnchorPane>
    </right>

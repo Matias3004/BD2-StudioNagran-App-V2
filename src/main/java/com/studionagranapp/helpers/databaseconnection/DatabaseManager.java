@@ -3,10 +3,11 @@ package com.studionagranapp.helpers.databaseconnection;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.query.QueryExecutor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class DatabaseManager {
 
@@ -14,6 +15,8 @@ public class DatabaseManager {
     private final DatabaseConnector databaseConnector;
     private final QueryExecutor queryExecutor;
     private final AlertManager alertManager;
+
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private DatabaseManager() {
         databaseConnector = new DatabaseConnector();
@@ -48,5 +51,106 @@ public class DatabaseManager {
 
             return DatabaseResponse.ERROR;
         }
+    }
+
+    public DatabaseResponse insertClient(String first_name, String last_name, String username, String password, String role, String email, String phone_number) {
+        String query = "SELECT * FROM User_accounts";
+        ResultSet usernames = queryExecutor.executeQuery(query);
+
+        try {
+            while (usernames.next()) {
+                if (Objects.equals(usernames.getString("username"), username))
+                    return DatabaseResponse.USERNAME_ALREADY_EXIST;
+            }
+
+            String addClientQuery = "INSERT INTO User_accounts (first_name, last_name, username, password, role, email, phone_number) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement preparedClient = getConnection().prepareStatement(addClientQuery);
+
+                return getDatabaseResponse(first_name, last_name, username, password, role, email, phone_number, preparedClient);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                e.getCause();
+
+                return DatabaseResponse.ERROR;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getCause();
+
+            return DatabaseResponse.ERROR;
+        }
+    }
+
+    public DatabaseResponse insertSession(String session_name, String band_name, LocalDate start_date, LocalDate end_date, String client, String engineer) {
+        String getClientsIdQuery = "SELECT account_id FROM User_accounts " +
+                "WHERE username = '" + client + "'";
+        ResultSet clientID = queryExecutor.executeQuery(getClientsIdQuery);
+
+        String engineerFirstName = engineer.split(" ")[0];
+        String engineerLastName = engineer.split(" ")[1];
+
+        String getEngineerIdQuery = "SELECT account_id FROM user_accounts " +
+                "WHERE first_name = '" + engineerFirstName +
+                "' AND last_name = '" + engineerLastName + "'";
+        ResultSet engineerID = queryExecutor.executeQuery(getEngineerIdQuery);
+
+        Integer duration = 8 * (int) ChronoUnit.DAYS.between(start_date, end_date);
+        Timestamp start_date_ts = Timestamp.valueOf(start_date.toString() + " 10:00:00");
+        Timestamp end_date_ts = Timestamp.valueOf(end_date.toString() + " 18:00:00");
+
+        try {
+            Integer Clients_id = 0;
+            Integer Engineer_id = 0;
+
+            if (clientID.next() && engineerID.next()) {
+                Clients_id = clientID.getInt("account_id");
+                Engineer_id = engineerID.getInt("account_id");
+            }
+
+            String addSessionQuery = "INSERT INTO Sessions (session_name, band_name, start_date, end_date, duration, Clients_id, Engineer_id) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement preparedSession = getConnection().prepareStatement(addSessionQuery);
+
+                return getDatabaseResponse(session_name, band_name, start_date_ts, end_date_ts, duration, Clients_id, Engineer_id, preparedSession);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                e.getCause();
+
+                return DatabaseResponse.ERROR;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getCause();
+
+            return DatabaseResponse.ERROR;
+        }
+    }
+
+    private DatabaseResponse getDatabaseResponse(String first_name, String last_name, String username, String password, String role, String email, String phone_number, PreparedStatement preparedClient) throws SQLException {
+        preparedClient.setString(1, first_name);
+        preparedClient.setString(2, last_name);
+        preparedClient.setString(3, username);
+        preparedClient.setString(4, password);
+        preparedClient.setString(5, role);
+        preparedClient.setString(6, email);
+        preparedClient.setString(7, phone_number);
+        preparedClient.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
+    private DatabaseResponse getDatabaseResponse(String session_name, String band_name, Timestamp start_date, Timestamp end_date, Integer duration, Integer Clients_id, Integer Engineer_id, PreparedStatement preparedSession) throws SQLException {
+        preparedSession.setString(1, session_name);
+        preparedSession.setString(2, band_name);
+        preparedSession.setTimestamp(3, start_date);
+        preparedSession.setTimestamp(4, end_date);
+        preparedSession.setInt(5, duration);
+        preparedSession.setInt(6, Clients_id);
+        preparedSession.setInt(7, Engineer_id);
+        preparedSession.execute();
+
+        return DatabaseResponse.SUCCESS;
     }
 }
