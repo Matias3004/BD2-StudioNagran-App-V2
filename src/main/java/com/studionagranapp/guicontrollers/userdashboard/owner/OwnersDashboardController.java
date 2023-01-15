@@ -141,10 +141,6 @@ public class OwnersDashboardController implements Initializable {
     }
 
     @FXML
-    public void scheduleSession() {
-    }
-
-    @FXML
     public void modifySession() {
         try {
             Session session = sessionsTable.getSelectionModel().getSelectedItem();
@@ -178,6 +174,9 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void addEngineer() {
+        NewEngineerDashboardController newEngineerDashboardController = (NewEngineerDashboardController)
+                SceneCreator.createScene("gui/new-engineer-dashboard.fxml", 600, 460);
+        assert newEngineerDashboardController != null;
     }
 
     @FXML

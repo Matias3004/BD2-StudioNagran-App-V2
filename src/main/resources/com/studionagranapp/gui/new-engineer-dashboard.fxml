@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.owner.NewEngineerDashboardController">
+    <top>
+        <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="returnButton" layoutX="486.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE;" text="Powrót" textAlignment="CENTER" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Label layoutX="14.0" layoutY="26.0" text="Dodawanie nowego realizatora">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+            <children>
+                <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #EEEEEE;" text="Utwórz konto" textFill="#b25900">
+                    <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children></AnchorPane>
+    </bottom>
+   <center>
+        <AnchorPane prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="120.0" text="Imię">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="nameField" layoutX="120.0" layoutY="21.0" prefHeight="24.0" prefWidth="360.0" promptText="Imię" />
+                <TextField fx:id="phoneField" layoutX="120.0" layoutY="162.0" prefHeight="24.0" prefWidth="360.0" promptText="Numer telefonu" />
+                <TextField fx:id="usernameField" layoutX="120.0" layoutY="209.0" prefWidth="360.0" promptText="Nazwa użytkownika" />
+                <PasswordField fx:id="passwordField" layoutX="120.0" layoutY="256.0" prefWidth="360.0" promptText="Hasło" />
+                <Label layoutX="120.0" layoutY="141.0" text="Numer telefonu">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="120.0" layoutY="188.0" text="Nazwa użytkownika">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="120.0" layoutY="235.0" text="Hasło">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="surnameField" layoutX="120.0" layoutY="68.0" prefHeight="24.0" prefWidth="360.0" promptText="Nazwisko" />
+                <Label layoutX="120.0" layoutY="47.0" text="Nazwisko">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="emailField" layoutX="120.0" layoutY="115.0" prefHeight="24.0" prefWidth="360.0" promptText="Email" />
+                <Label layoutX="120.0" layoutY="94.0" text="Email">
+                    <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+   </center>
+</BorderPane>
