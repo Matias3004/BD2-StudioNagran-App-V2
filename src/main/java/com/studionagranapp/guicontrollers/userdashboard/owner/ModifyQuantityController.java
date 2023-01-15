@@ -14,7 +14,7 @@ public class ModifyQuantityController {
     private Integer equipmentID;
 
     @FXML
-    private Button modifyButton;
+    private Button returnButton;
     @FXML
     private TextField newQuantityField;
 
@@ -33,8 +33,9 @@ public class ModifyQuantityController {
         this.alertManager = alertManager;
     }
 
+    @FXML
     private void close() {
-        Stage stage = (Stage) modifyButton.getScene().getWindow();
+        Stage stage = (Stage) returnButton.getScene().getWindow();
         stage.close();
     }
 
