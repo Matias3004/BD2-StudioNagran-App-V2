@@ -203,16 +203,14 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void addEquipment() {
-        // Create the custom addEquipmentDialog.
         Dialog<Pair<String, String>> addEquipmentDialog = new Dialog<>();
         addEquipmentDialog.setTitle("Dodawanie sprzętu");
         addEquipmentDialog.setHeaderText("Dodaj nowy sprzęt");
 
-// Set the button types.
         ButtonType loginButtonType = new ButtonType("Dodaj", ButtonBar.ButtonData.OK_DONE);
-        addEquipmentDialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+        ButtonType cancelButtonType = new ButtonType("Powrót", ButtonBar.ButtonData.CANCEL_CLOSE);
+        addEquipmentDialog.getDialogPane().getButtonTypes().addAll(loginButtonType, cancelButtonType);
 
-// Create the username and password labels and fields.
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -239,23 +237,28 @@ public class OwnersDashboardController implements Initializable {
 
         addEquipmentDialog.getDialogPane().setContent(grid);
 
-// Request focus on the username field by default.
         Platform.runLater(equipmentName::requestFocus);
 
         Optional<Pair<String, String>> result = addEquipmentDialog.showAndWait();
 
-        if (result.isPresent()) {
+        if (result.isPresent() && !equipmentName.getText().isBlank() && !equipmentType.getText().isBlank() &&
+                !equipmentQuantity.getText().isBlank() &&
+                !(backlineChoiceBox.getSelectionModel().getSelectedItem() == null)) {
             DatabaseResponse newEquipmentResult = databaseManager
                     .insertEquipment(equipmentName.getText(),
                             equipmentType.getText(),
                             equipmentQuantity.getText(),
                             backlineChoiceBox.getSelectionModel().getSelectedItem());
-            if (newEquipmentResult == DatabaseResponse.SUCCESS)
+            if (newEquipmentResult == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Sprzęt dodany pomyslnie!");
+                refresh();
+            }
             else
                 alertManager.throwError("Błąd zapisu danych do bazy!");
-        } else
+        } else {
             alertManager.throwError("Sprawdź wprowadzone dane!");
+            addEquipment();
+        }
     }
 
     @FXML
