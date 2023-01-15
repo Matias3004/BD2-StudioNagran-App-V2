@@ -1,5 +1,6 @@
 package com.studionagranapp.guicontrollers.userdashboard.client;
 
+import com.studionagranapp.guicontrollers.userdashboard.ModifySessionController;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
@@ -106,6 +107,28 @@ public class ClientsDashboardController implements Initializable {
         assert newSessionDashboardController != null;
         newSessionDashboardController.setUserID(userId);
         newSessionDashboardController.setAlertManager(alertManager);
+    }
+
+    @FXML
+    public void modifySession() {
+        try {
+            Session session = mySessionsTable.getSelectionModel().getSelectedItem();
+            Integer sessionID = session.getId();
+
+            if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 7) {
+                alertManager.throwError("Nie możesz zmienić terminu sesji na mniej niż tydzień przed zaplanowanym terminem!");
+
+                return;
+            }
+
+            ModifySessionController modifySessionController = (ModifySessionController)
+                    SceneCreator.createScene("gui/modify-session-window.fxml", 240, 150);
+            assert modifySessionController != null;
+            modifySessionController.setAlertManager(alertManager);
+            modifySessionController.setSessionID(sessionID);
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnej sesji z listy!");
+        }
     }
 
     @FXML
