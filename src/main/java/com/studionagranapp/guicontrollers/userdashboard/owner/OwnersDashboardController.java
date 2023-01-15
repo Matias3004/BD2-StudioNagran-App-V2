@@ -1,5 +1,6 @@
 package com.studionagranapp.guicontrollers.userdashboard.owner;
 
+import com.studionagranapp.guicontrollers.userdashboard.ModifySessionController;
 import com.studionagranapp.helpers.configurators.tableconfigurators.ClientsTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EngineersTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
@@ -145,6 +146,18 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void modifySession() {
+        try {
+            Session session = sessionsTable.getSelectionModel().getSelectedItem();
+            Integer sessionID = session.getId();
+
+            ModifySessionController modifySessionController = (ModifySessionController)
+                    SceneCreator.createScene("gui/modify-session-window.fxml", 240, 150);
+            assert modifySessionController != null;
+            modifySessionController.setAlertManager(alertManager);
+            modifySessionController.setSessionID(sessionID);
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnej sesji z listy!");
+        }
     }
 
     @FXML
@@ -188,7 +201,7 @@ public class OwnersDashboardController implements Initializable {
                 refresh();
             }
         } catch (Exception e) {
-            alertManager.throwError("Wystąpił błąd podczas usuwania danych. Zaznacz w tabeli sprzęt, który chcesz usunąć!");
+            alertManager.throwError("Nie wybrano żadnego sprzętu z listy!");
         }
     }
 

@@ -123,6 +123,45 @@ public class DatabaseManager {
         }
     }
 
+    public DatabaseResponse updateSessionDate(Integer sessionID, LocalDate newStartDate, LocalDate newEndDate) {
+        String query = "SELECT * FROM Sessions WHERE id != " + sessionID;
+        ResultSet sessions = queryExecutor.executeQuery(query);
+
+        Timestamp newStartDate_ts = Timestamp.valueOf(newStartDate + " 10:00:00");
+        Timestamp newEndDate_ts = Timestamp.valueOf(newEndDate + " 18:00:00");
+
+        try {
+            while (sessions.next()) {
+                if (checkIfSessionDateIsOccupied(sessions, newStartDate_ts, newEndDate_ts))
+                    return DatabaseResponse.SESSION_DATE_OCCUPIED;
+            }
+            String updateSessionDateQuery = "UPDATE Sessions SET start_date = (?), end_date = (?) WHERE id = (?)";
+            try {
+                PreparedStatement preparedStatement = getConnection().prepareStatement(updateSessionDateQuery);
+
+                return getDatabaseResponse(newStartDate_ts, newEndDate_ts, sessionID, preparedStatement);
+            } catch (SQLException e) {
+                alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+            } catch (Exception e) {
+                alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getCause();
+
+            return DatabaseResponse.ERROR;
+        }
+
+        return DatabaseResponse.ERROR;
+    }
+
+    private boolean checkIfSessionDateIsOccupied(ResultSet sessions, Timestamp newStartDate, Timestamp newEndDate) throws SQLException {
+        Timestamp startDate = sessions.getTimestamp("start_date");
+        Timestamp endDate = sessions.getTimestamp("end_date");
+
+        return newStartDate.after(startDate) || newStartDate.before(endDate);
+    }
+
     public DatabaseResponse updateEquipmentQuantity(Integer id, String newQuantity) {
         String query = "UPDATE Equipment SET quantity = (?) WHERE id = (?)";
 
@@ -161,6 +200,15 @@ public class DatabaseManager {
         preparedSession.setInt(6, Clients_id);
         preparedSession.setInt(7, Engineer_id);
         preparedSession.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
+    private DatabaseResponse getDatabaseResponse(Timestamp newStartDate, Timestamp newEndDate, Integer sessionID, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setTimestamp(1, newStartDate);
+        preparedStatement.setTimestamp(2, newEndDate);
+        preparedStatement.setInt(3, sessionID);
+        preparedStatement.execute();
 
         return DatabaseResponse.SUCCESS;
     }

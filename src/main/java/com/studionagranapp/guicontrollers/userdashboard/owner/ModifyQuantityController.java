@@ -46,8 +46,7 @@ public class ModifyQuantityController {
             if (result == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Zaaktualizowano ilosć!");
                 close();
-            }
-            else
+            } else
                 alertManager.throwError("Wystąpił błąd podczas zmiany ilosci sprzetu");
         } else {
             alertManager.throwError("Podaj nową ilosć!");

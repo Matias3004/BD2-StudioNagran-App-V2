@@ -14,6 +14,8 @@ module com.example.studionagranapp {
     opens com.studionagranapp.helpers.query;
     exports com.studionagranapp.helpers.contentloaders;
     opens com.studionagranapp.helpers.contentloaders to javafx.fxml;
+    opens com.studionagranapp.guicontrollers.userdashboard;
+    exports com.studionagranapp.guicontrollers.userdashboard to javafx.fxml;
     exports com.studionagranapp.guicontrollers.userdashboard.client;
     opens com.studionagranapp.guicontrollers.userdashboard.client to javafx.fxml;
     exports com.studionagranapp.guicontrollers.userdashboard.engineer;
