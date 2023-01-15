@@ -1,4 +1,4 @@
-package com.studionagranapp.guicontrollers.userdashboard;
+package com.studionagranapp.guicontrollers.userdashboard.client;
 
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
@@ -125,7 +125,7 @@ public class ClientsDashboardController implements Initializable {
                 refresh();
             }
         } catch (Exception e) {
-            alertManager.throwError("Wystąpił błąd podczas usuwania sesji. Zaznacz w tabeli sesję, którą chcesz odwołać!");
+            alertManager.throwError("Nie wybrano żadnej sesji z listy!");
         }
     }
 
