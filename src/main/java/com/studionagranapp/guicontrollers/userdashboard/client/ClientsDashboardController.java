@@ -141,9 +141,9 @@ public class ClientsDashboardController implements Initializable {
                 return;
             }
             DatabaseResponse result = databaseManager.delete(session);
-            if (result == DatabaseResponse.ERROR) {
+            if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania sesji.");
-            } else if (result == DatabaseResponse.SUCCESS) {
+            else if (result == DatabaseResponse.SUCCESS) {
                 alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
                 refresh();
             }

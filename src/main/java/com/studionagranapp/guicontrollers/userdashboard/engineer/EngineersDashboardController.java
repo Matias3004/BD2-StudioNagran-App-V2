@@ -5,6 +5,7 @@ import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTab
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
+import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.models.Equipment;
 import com.studionagranapp.helpers.models.Mix;
@@ -128,7 +129,24 @@ public class EngineersDashboardController implements Initializable {
 
     @FXML
     private void cancelSession() {
+        try {
+            Session session = mySessionsTable.getSelectionModel().getSelectedItem();
+            if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 2) {
+                alertManager.throwError("Nie możesz anulować sesji na mniej niż 2 dni przed zaplanowaną datą!");
 
+                return;
+            }
+
+            DatabaseResponse result = databaseManager.delete(session);
+            if (result == DatabaseResponse.ERROR)
+                alertManager.throwError("Wystąpił błąd podczas usuwania sesji");
+            else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnej sesji z listy!");
+        }
     }
 
     @FXML
