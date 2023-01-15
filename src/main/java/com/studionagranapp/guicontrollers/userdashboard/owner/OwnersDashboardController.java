@@ -149,6 +149,18 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void cancelSession() {
+        try {
+            Session session = sessionsTable.getSelectionModel().getSelectedItem();
+            DatabaseResponse result = databaseManager.delete(session);
+            if (result == DatabaseResponse.ERROR)
+                alertManager.throwError("Wystąpił błąd podczas usuwania sesji");
+            else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnej sesji z listy!");
+        }
     }
 
     @FXML
