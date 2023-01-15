@@ -179,6 +179,25 @@ public class DatabaseManager {
         return newStartDate.after(startDate) && newStartDate.before(endDate);
     }
 
+    public DatabaseResponse insertEquipment(String eqName, String eqType, String eqQuantity, String backline) {
+        int isBackline = 0;
+        if (backline.equals("Tak"))
+            isBackline = 1;
+
+        String query = "INSERT INTO Equipment (name, type, quantity, backline) VALUES (?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            return getDatabaseResponse(eqName, eqType, eqQuantity, isBackline, preparedStatement);
+        } catch (SQLException e) {
+            alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+        } catch (Exception e) {
+            alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane");
+        }
+
+        return DatabaseResponse.ERROR;
+    }
+
     public DatabaseResponse updateEquipmentQuantity(Integer id, String newQuantity) {
         String query = "UPDATE Equipment SET quantity = (?) WHERE id = (?)";
 
@@ -225,6 +244,16 @@ public class DatabaseManager {
         preparedStatement.setTimestamp(1, newStartDate);
         preparedStatement.setTimestamp(2, newEndDate);
         preparedStatement.setInt(3, sessionID);
+        preparedStatement.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
+    private DatabaseResponse getDatabaseResponse(String eqName, String eqType, String eqQuantity, Integer backline, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, eqName);
+        preparedStatement.setString(2, eqType);
+        preparedStatement.setString(3, eqQuantity);
+        preparedStatement.setInt(4, backline);
         preparedStatement.execute();
 
         return DatabaseResponse.SUCCESS;

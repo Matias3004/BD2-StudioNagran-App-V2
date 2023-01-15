@@ -13,18 +13,23 @@ import com.studionagranapp.helpers.models.Equipment;
 
 import com.studionagranapp.helpers.models.Session;
 import com.studionagranapp.helpers.models.User;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class OwnersDashboardController implements Initializable {
@@ -198,6 +203,59 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void addEquipment() {
+        // Create the custom addEquipmentDialog.
+        Dialog<Pair<String, String>> addEquipmentDialog = new Dialog<>();
+        addEquipmentDialog.setTitle("Dodawanie sprzętu");
+        addEquipmentDialog.setHeaderText("Dodaj nowy sprzęt");
+
+// Set the button types.
+        ButtonType loginButtonType = new ButtonType("Dodaj", ButtonBar.ButtonData.OK_DONE);
+        addEquipmentDialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+// Create the username and password labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField equipmentName = new TextField();
+        equipmentName.setPromptText("Nazwa sprzętu");
+        TextField equipmentType = new TextField();
+        equipmentType.setPromptText("Rodzaj sprzętu");
+        TextField equipmentQuantity = new TextField();
+        equipmentQuantity.setPromptText("Ilosć");
+        ChoiceBox<String> backlineChoiceBox = new ChoiceBox<String>();
+        backlineChoiceBox.getItems().add("Tak");
+        backlineChoiceBox.getItems().add("Nie");
+
+        grid.add(new Label("Nazwa sprzętu:"), 0, 0);
+        grid.add(equipmentName, 1, 0);
+        grid.add(new Label("Rodzaj sprzętu:"), 0, 1);
+        grid.add(equipmentType, 1, 1);
+        grid.add(new Label("Ilosć:"), 0, 2);
+        grid.add(equipmentQuantity, 1, 2);
+        grid.add(new Label("Backline:"), 0, 3);
+        grid.add(backlineChoiceBox, 1, 3);
+
+        addEquipmentDialog.getDialogPane().setContent(grid);
+
+// Request focus on the username field by default.
+        Platform.runLater(equipmentName::requestFocus);
+
+        Optional<Pair<String, String>> result = addEquipmentDialog.showAndWait();
+
+        if (result.isPresent()) {
+            DatabaseResponse newEquipmentResult = databaseManager
+                    .insertEquipment(equipmentName.getText(),
+                            equipmentType.getText(),
+                            equipmentQuantity.getText(),
+                            backlineChoiceBox.getSelectionModel().getSelectedItem());
+            if (newEquipmentResult == DatabaseResponse.SUCCESS)
+                alertManager.throwConfirmation("Sprzęt dodany pomyslnie!");
+            else
+                alertManager.throwError("Błąd zapisu danych do bazy!");
+        } else
+            alertManager.throwError("Sprawdź wprowadzone dane!");
     }
 
     @FXML
