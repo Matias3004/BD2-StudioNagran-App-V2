@@ -1,6 +1,7 @@
 package com.studionagranapp.helpers.databaseconnection;
 
 import com.studionagranapp.helpers.errorhandling.AlertManager;
+import com.studionagranapp.helpers.models.Equipment;
 import com.studionagranapp.helpers.models.Session;
 import com.studionagranapp.helpers.query.QueryExecutor;
 
@@ -122,6 +123,22 @@ public class DatabaseManager {
         }
     }
 
+    public DatabaseResponse updateEquipmentQuantity(Integer id, String newQuantity) {
+        String query = "UPDATE Equipment SET quantity = (?) WHERE id = (?)";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            return getDatabaseResponse(newQuantity, id, preparedStatement);
+        } catch (SQLException e) {
+            alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+        } catch (Exception e) {
+            alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane.");
+        }
+
+        return DatabaseResponse.ERROR;
+    }
+
     private DatabaseResponse getDatabaseResponse(String first_name, String last_name, String username, String password, String role, String email, String phone_number, PreparedStatement preparedClient) throws SQLException {
         preparedClient.setString(1, first_name);
         preparedClient.setString(2, last_name);
@@ -148,8 +165,22 @@ public class DatabaseManager {
         return DatabaseResponse.SUCCESS;
     }
 
+    private DatabaseResponse getDatabaseResponse(String newQuantity, Integer id, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, newQuantity);
+        preparedStatement.setInt(2, id);
+        preparedStatement.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
     public DatabaseResponse delete(Session session) {
         String deleteQuery = "DELETE FROM Sessions WHERE id = " + session.getId();
+
+        return performDeletion(deleteQuery);
+    }
+
+    public DatabaseResponse delete(Equipment equipment) {
+        String deleteQuery = "DELETE FROM Equipment WHERE id = " + equipment.getId();
 
         return performDeletion(deleteQuery);
     }

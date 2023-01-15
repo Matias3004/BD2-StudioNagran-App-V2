@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studionagranapp.guicontrollers.userdashboard.owner.ModifyQuantityController">
+   <children>
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="modifyButton" layoutX="48.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifyQuantity" prefHeight="32.0" prefWidth="105.0" style="-fx-background-color: #EEEEEE;" text="Zmień ilość" textFill="#b25900">
+                     <font>
+                        <Font name="SF Pro Display Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="newQuantityField" layoutX="10.0" layoutY="24.0" prefWidth="180.0" promptText="Nowa ilość" />
+                  <Label layoutX="10.0" layoutY="6.0" text="Podaj nową ilość:">
+                     <font>
+                        <Font name="SF Pro Display Regular" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

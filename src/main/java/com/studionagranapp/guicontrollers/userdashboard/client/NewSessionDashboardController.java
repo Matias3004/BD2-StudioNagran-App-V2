@@ -1,4 +1,4 @@
-package com.studionagranapp.guicontrollers.userdashboard;
+package com.studionagranapp.guicontrollers.userdashboard.client;
 
 import com.studionagranapp.helpers.configurators.choiceboxconfigurators.EngineersChoiceBoxConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;

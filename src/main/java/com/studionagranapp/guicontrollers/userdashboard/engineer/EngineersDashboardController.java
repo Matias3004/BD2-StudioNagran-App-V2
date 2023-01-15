@@ -1,4 +1,4 @@
-package com.studionagranapp.guicontrollers.userdashboard;
+package com.studionagranapp.guicontrollers.userdashboard.engineer;
 
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;

@@ -1,9 +1,9 @@
 package com.studionagranapp.guicontrollers.login;
 
-import com.studionagranapp.guicontrollers.userdashboard.ClientsDashboardController;
-import com.studionagranapp.guicontrollers.userdashboard.EngineersDashboardController;
-import com.studionagranapp.guicontrollers.userdashboard.NewClientsDashboardController;
-import com.studionagranapp.guicontrollers.userdashboard.OwnersDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.client.ClientsDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.engineer.EngineersDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.client.NewClientsDashboardController;
+import com.studionagranapp.guicontrollers.userdashboard.owner.OwnersDashboardController;
 import com.studionagranapp.helpers.loginvalidation.LoginValidation;
 import com.studionagranapp.helpers.loginvalidation.LoginValidator;
 import com.studionagranapp.helpers.loginvalidation.UserInfoProvider;

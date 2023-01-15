@@ -1,4 +1,4 @@
-package com.studionagranapp.guicontrollers.userdashboard;
+package com.studionagranapp.guicontrollers.userdashboard.owner;
 
 import com.studionagranapp.helpers.configurators.tableconfigurators.ClientsTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EngineersTableConfigurator;
@@ -6,6 +6,7 @@ import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTab
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
+import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.models.Equipment;
 
@@ -164,10 +165,35 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void deleteEquipment() {
+        try {
+            Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
+
+            DatabaseResponse result = databaseManager.delete(equipment);
+            if (result == DatabaseResponse.ERROR)
+                alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy.");
+            else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwConfirmation("Sprzęt usunięty pomyslnie!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Wystąpił błąd podczas usuwania danych. Zaznacz w tabeli sprzęt, który chcesz usunąć!");
+        }
     }
 
     @FXML
     public void modifyEqQuantity() {
+        try {
+            Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
+            Integer equipmentID = equipment.getId();
+
+            ModifyQuantityController modifyQuantityController = (ModifyQuantityController)
+                SceneCreator.createScene("gui/modify-quantity-window.fxml", 200, 100);
+            assert modifyQuantityController != null;
+            modifyQuantityController.setAlertManager(alertManager);
+            modifyQuantityController.setEquipmentID(equipmentID);
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnego przedmiotu z listy!");
+        }
     }
 
     private void initSessionsData() {
