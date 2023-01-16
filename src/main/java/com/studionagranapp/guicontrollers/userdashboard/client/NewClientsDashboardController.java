@@ -80,12 +80,12 @@ public class NewClientsDashboardController implements Initializable {
                             emailField.getText(),
                             phoneField.getText());
             if (newClientResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwInformation("Sesja zarezerwowana pomyslnie!");
+                alertManager.throwInformation("Rejestracja przebiegła pomyslnie!");
                 goBack();
             } else
                 alertManager.throwError("Istnieje już użytkownik o wybranej nazwie!");
         } else
-            alertManager.throwError("Błąd zapisu danych do bazy!");
+            alertManager.throwError("Błąd zapisu danych do bazy");
     }
 
     private boolean isDataFieldsBlank() {
