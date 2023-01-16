@@ -165,11 +165,19 @@ public class OwnersDashboardController implements Initializable {
     public void cancelSession() {
         try {
             Session session = sessionsTable.getSelectionModel().getSelectedItem();
+            if (session == null)
+                throw new Exception();
+
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz odwołać wybraną sesję?");
+            if (!confirmation)
+                return;
+
             DatabaseResponse result = databaseManager.delete(session);
             if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania sesji");
             else if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                alertManager.throwInformation("Pomyslnie odwołano sesję!");
                 refresh();
             }
         } catch (Exception e) {
@@ -188,12 +196,19 @@ public class OwnersDashboardController implements Initializable {
     public void deleteEngineer() {
         try {
             User engineer = engineersTable.getSelectionModel().getSelectedItem();
+            if (engineer == null)
+                throw new Exception();
+
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz usunąć wybranego realizatora?");
+            if (!confirmation)
+                return;
 
             DatabaseResponse result = databaseManager.delete(engineer);
             if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy");
             else if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Realizator usunięty pomyslnie!");
+                alertManager.throwInformation("Realizator usunięty pomyslnie!");
                 refresh();
             }
         } catch (Exception e) {
@@ -250,7 +265,7 @@ public class OwnersDashboardController implements Initializable {
                             equipmentQuantity.getText(),
                             backlineChoiceBox.getSelectionModel().getSelectedItem());
             if (newEquipmentResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Sprzęt dodany pomyslnie!");
+                alertManager.throwInformation("Sprzęt dodany pomyslnie!");
                 refresh();
             }
             else
@@ -265,12 +280,19 @@ public class OwnersDashboardController implements Initializable {
     public void deleteEquipment() {
         try {
             Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
+            if (equipment == null)
+                throw new Exception();
+
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz usunąć wybrany sprzęt?");
+            if (!confirmation)
+                return;
 
             DatabaseResponse result = databaseManager.delete(equipment);
             if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy");
             else if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Sprzęt usunięty pomyslnie!");
+                alertManager.throwInformation("Sprzęt usunięty pomyslnie!");
                 refresh();
             }
         } catch (Exception e) {

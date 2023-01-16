@@ -48,7 +48,7 @@ public class ModifySessionController {
                             newStartDateField.getValue(),
                             newEndDateField.getValue());
             if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Pomyslnie zmieniono sesję!");
+                alertManager.throwInformation("Pomyslnie zmieniono sesję!");
                 close();
             } else if (result == DatabaseResponse.SESSION_DATE_OCCUPIED)
                 alertManager.throwError("Wybrany termin jest zajęty!");

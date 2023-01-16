@@ -15,10 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -27,6 +24,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientsDashboardController implements Initializable {
@@ -116,7 +114,8 @@ public class ClientsDashboardController implements Initializable {
             Integer sessionID = session.getId();
 
             if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 7) {
-                alertManager.throwError("Nie możesz zmienić terminu sesji na mniej niż tydzień przed zaplanowanym terminem!");
+                alertManager.throwError(
+                        "Nie możesz zmienić terminu sesji na mniej niż tydzień przed zaplanowanym terminem!");
 
                 return;
             }
@@ -135,16 +134,25 @@ public class ClientsDashboardController implements Initializable {
     private void cancelSession() {
         try {
             Session session = mySessionsTable.getSelectionModel().getSelectedItem();
+            if (session == null)
+                throw new Exception();
+
             if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 7) {
                 alertManager.throwError("Nie możesz odwołać sesji na mniej niż tydzień przed zaplanowanym terminem!");
 
                 return;
             }
+
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz odwołać wybraną sesję?");
+            if (!confirmation)
+                return;
+
             DatabaseResponse result = databaseManager.delete(session);
             if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania sesji.");
             else if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                alertManager.throwInformation("Pomyslnie odwołano sesję!");
                 refresh();
             }
         } catch (Exception e) {

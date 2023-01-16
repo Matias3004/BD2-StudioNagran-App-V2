@@ -154,17 +154,25 @@ public class EngineersDashboardController implements Initializable {
     private void cancelSession() {
         try {
             Session session = mySessionsTable.getSelectionModel().getSelectedItem();
+            if (session == null)
+                throw new Exception();
+
             if (ChronoUnit.DAYS.between(LocalDate.now(), session.getStartDate().toLocalDate()) < 2) {
                 alertManager.throwError("Nie możesz anulować sesji na mniej niż 2 dni przed zaplanowaną datą!");
 
                 return;
             }
 
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz odwołać wybraną sesję?");
+            if (!confirmation)
+                return;
+
             DatabaseResponse result = databaseManager.delete(session);
             if (result == DatabaseResponse.ERROR)
                 alertManager.throwError("Wystąpił błąd podczas usuwania sesji");
             else if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Pomyslnie odwołano sesję!");
+                alertManager.throwInformation("Pomyslnie odwołano sesję!");
                 refresh();
             }
         } catch (Exception e) {
@@ -215,7 +223,7 @@ public class EngineersDashboardController implements Initializable {
                             filePath.getText(),
                             sessionChoiceBox.getSelectionModel().getSelectedItem());
             if (newMixResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Miks dodany pomyslnie!");
+                alertManager.throwInformation("Miks dodany pomyslnie!");
                 refresh();
             }
             else

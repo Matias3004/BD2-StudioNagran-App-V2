@@ -50,7 +50,7 @@ public class NewEngineerDashboardController {
                             emailField.getText(),
                             phoneField.getText());
             if (newClientResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Realizator dodany pomyslnie!");
+                alertManager.throwInformation("Realizator dodany pomyslnie!");
                 goBack();
             } else
                 alertManager.throwError("Istnieje już użytkownik o tej samej nazwie!");

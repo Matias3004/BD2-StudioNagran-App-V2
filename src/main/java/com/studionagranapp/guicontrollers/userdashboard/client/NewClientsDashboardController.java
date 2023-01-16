@@ -1,6 +1,5 @@
 package com.studionagranapp.guicontrollers.userdashboard.client;
 
-import com.studionagranapp.helpers.configurators.choiceboxconfigurators.EngineersChoiceBoxConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
@@ -15,12 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Filter;
 
 public class NewClientsDashboardController implements Initializable {
 
@@ -83,7 +80,7 @@ public class NewClientsDashboardController implements Initializable {
                             emailField.getText(),
                             phoneField.getText());
             if (newClientResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Sesja zarezerwowana pomyslnie!");
+                alertManager.throwInformation("Sesja zarezerwowana pomyslnie!");
                 goBack();
             } else
                 alertManager.throwError("Istnieje już użytkownik o wybranej nazwie!");

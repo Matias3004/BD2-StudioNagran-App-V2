@@ -4,7 +4,6 @@ import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
 import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -45,7 +44,7 @@ public class ModifyQuantityController {
             DatabaseResponse result = databaseManager
                     .updateEquipmentQuantity(this.equipmentID, newQuantityField.getText());
             if (result == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Zaaktualizowano ilosć!");
+                alertManager.throwInformation("Zaaktualizowano ilosć!");
                 close();
             } else
                 alertManager.throwError("Wystąpił błąd podczas zmiany ilosci sprzetu");

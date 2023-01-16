@@ -1,26 +1,16 @@
 package com.studionagranapp.guicontrollers.userdashboard.client;
 
 import com.studionagranapp.helpers.configurators.choiceboxconfigurators.EngineersChoiceBoxConfigurator;
-import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
-import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
 import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
-import com.studionagranapp.helpers.models.Equipment;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Filter;
 
 public class NewSessionDashboardController implements Initializable {
 
@@ -75,7 +65,7 @@ public class NewSessionDashboardController implements Initializable {
                             this.userID,
                             engineersChoiceBox.getValue());
             if (newSessionResult == DatabaseResponse.SUCCESS) {
-                alertManager.throwConfirmation("Sesja zarezerwowana pomyslnie!");
+                alertManager.throwInformation("Sesja zarezerwowana pomyslnie!");
                 goBack();
             } else if (newSessionResult == DatabaseResponse.SESSION_DATE_OCCUPIED)
                 alertManager.throwError("Wybrany termin jest zajęty!");
