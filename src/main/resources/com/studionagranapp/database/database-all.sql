@@ -1,27 +1,27 @@
 use Studio_nagran;
 
-drop trigger Mix_notes_insert;
-drop trigger Mix_notes_update;
-drop trigger Mix_notes_delete;
-drop trigger Mixes_insert;
-drop trigger Mixes_update;
-drop trigger Mixes_delete;
-drop trigger Equipment_insert;
-drop trigger Equipment_update;
-drop trigger Equipment_delete;
+DROP TRIGGER Mix_notes_insert;
+DROP TRIGGER Mix_notes_update;
+DROP TRIGGER Mix_notes_delete;
+DROP TRIGGER Mixes_insert;
+DROP TRIGGER Mixes_update;
+DROP TRIGGER Mixes_delete;
+DROP TRIGGER Equipment_insert;
+DROP TRIGGER Equipment_update;
+DROP TRIGGER Equipment_delete;
 
-set foreign_key_checks = 0;
-drop table User_accounts;
-drop table Sessions;
-drop table Equipment;
-drop table Equipment_history;
-drop table Mixes;
-drop table Mixes_history;
-drop table Mix_notes;
-drop table Mix_notes_history;
-set foreign_key_checks = 1;
+SET foreign_key_checks = 0;
+DROP TABLE User_accounts;
+DROP TABLE Sessions;
+DROP TABLE Equipment;
+DROP TABLE Equipment_history;
+DROP TABLE Mixes;
+DROP TABLE Mixes_history;
+DROP TABLE Mix_notes;
+DROP TABLE Mix_notes_history;
+SET foreign_key_checks = 1;
 
-set SQL_SAFE_UPDATES = 0;
+SET SQL_SAFE_UPDATES = 0;
 
 CREATE TABLE User_accounts (
     account_id int NOT NULL AUTO_INCREMENT,
@@ -50,61 +50,61 @@ CREATE TABLE Sessions (
     UNIQUE KEY session_name_unique (session_name)
 );
 
-create table Equipment (
-    id int not null auto_increment,
-    name varchar(64) not null,
+CREATE TABLE Equipment (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(64) NOT NULL,
     type varchar(64),
-    quantity int not null,
-    backline bool not null,
-    primary key (id),
-    unique key name_unique (name)
+    quantity int NOT NULL,
+    backline bool NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY name_unique (name)
 );
 
-create table Equipment_history (
-    id int auto_increment primary key,
+CREATE TABLE Equipment_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     action enum('insert', 'update', 'delete'),
-    action_time timestamp default current_timestamp,
+    action_time timestamp DEFAULT current_timestamp,
     Equipment_id int,
-    name varchar(64) not null,
+    name varchar(64) NOT NULL,
     type varchar(64),
-    quantity int not null,
-    backline bool not null
+    quantity int NOT NULL,
+    backline bool NOT NULL
 );
 
-create table Mixes (
-    id int auto_increment primary key,
-    filename varchar(255) not null unique,
-    upload_date timestamp default current_timestamp not null,
-    path varchar(255) not null unique,
-    Session_id int not null
+CREATE TABLE Mixes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filename varchar(255) NOT NULL unique,
+    upload_date timestamp default current_timestamp NOT NULL,
+    path varchar(255) NOT NULL unique,
+    Session_id int NOT NULL
 );
 
-create table Mixes_history (
-    id int auto_increment primary key ,
+CREATE TABLE Mixes_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     action enum('insert', 'update', 'delete'),
     action_time timestamp default current_timestamp,
     Mix_id int,
-    filename varchar(255) not null,
-    upload_date timestamp default current_timestamp not null,
-    path varchar(255) not null,
-    Session_id int not null
+    filename varchar(255) NOT NULL,
+    upload_date timestamp default current_timestamp NOT NULL,
+    path varchar(255) NOT NULL,
+    Session_id int NOT NULL
 );
 
-create table Mix_notes (
-    id int auto_increment primary key,
-    upload_date timestamp default current_timestamp not null,
-    description varchar(255) not null,
-    Mix_id int not null
+CREATE TABLE Mix_notes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    upload_date timestamp default current_timestamp NOT NULL,
+    description varchar(255) NOT NULL,
+    Mix_id int NOT NULL
 );
 
-create table Mix_notes_history (
-    id int auto_increment primary key,
+CREATE TABLE Mix_notes_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     action enum('insert', 'update', 'delete'),
     action_time timestamp default current_timestamp,
     Mix_note_id int,
-    upload_date timestamp default current_timestamp not null,
-    description varchar(255) not null,
-    Mix_id int not null
+    upload_date timestamp default current_timestamp NOT NULL,
+    description varchar(255) NOT NULL,
+    Mix_id int NOT NULL
 );
 
 alter table Equipment
