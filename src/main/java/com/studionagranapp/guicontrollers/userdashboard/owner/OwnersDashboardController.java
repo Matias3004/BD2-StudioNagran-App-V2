@@ -34,8 +34,6 @@ import java.util.ResourceBundle;
 
 public class OwnersDashboardController implements Initializable {
 
-    private Integer userId;
-
     @FXML
     private Label userInfo;
     @FXML
@@ -104,10 +102,6 @@ public class OwnersDashboardController implements Initializable {
         engineersTableConfigurator = new EngineersTableConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public void setUserInfo(String userInfo) {
@@ -237,7 +231,7 @@ public class OwnersDashboardController implements Initializable {
         equipmentType.setPromptText("Rodzaj sprzętu");
         TextField equipmentQuantity = new TextField();
         equipmentQuantity.setPromptText("Ilosć");
-        ChoiceBox<String> backlineChoiceBox = new ChoiceBox<String>();
+        ChoiceBox<String> backlineChoiceBox = new ChoiceBox<>();
         backlineChoiceBox.getItems().add("Tak");
         backlineChoiceBox.getItems().add("Nie");
 

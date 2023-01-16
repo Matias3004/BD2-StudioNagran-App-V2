@@ -18,6 +18,7 @@ public class SectionLoader {
         }
         borderPane.setCenter(root);
 
+        assert fxmlLoader != null;
         return fxmlLoader.getController();
     }
 }

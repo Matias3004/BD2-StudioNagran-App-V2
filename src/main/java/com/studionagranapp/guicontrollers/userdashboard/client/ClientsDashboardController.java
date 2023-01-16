@@ -21,7 +21,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -39,8 +38,6 @@ public class ClientsDashboardController implements Initializable {
 
     @FXML
     private Button logoutButton;
-    @FXML
-    private BorderPane borderPane;
     @FXML
     private Label userInfo;
 

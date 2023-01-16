@@ -45,7 +45,6 @@ public class LoginController {
                         OwnersDashboardController ownersDashboardController = (OwnersDashboardController)
                                 SceneCreator.createScene("gui/owner-dashboard.fxml", 800, 600);
                         assert ownersDashboardController != null;
-                        ownersDashboardController.setUserId(userInfoProvider.getId());
                         ownersDashboardController.setUserInfo(userInfoProvider.getName());
                         quit();
                     }

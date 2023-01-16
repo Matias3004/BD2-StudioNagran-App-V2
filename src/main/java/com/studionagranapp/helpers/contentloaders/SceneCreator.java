@@ -4,7 +4,6 @@ import com.studionagranapp.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class SceneCreator {
 
