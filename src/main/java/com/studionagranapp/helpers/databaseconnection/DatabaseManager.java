@@ -101,8 +101,8 @@ public class DatabaseManager {
         ResultSet engineerID = queryExecutor.executeQuery(getEngineerIdQuery);
 
         Integer duration = 8 * (int) ChronoUnit.DAYS.between(startDate, endDate);
-        Timestamp start_date = Timestamp.valueOf(startDate + " 10:00:00");
-        Timestamp end_date = Timestamp.valueOf(endDate + " 18:00:00");
+        Timestamp start_date = Timestamp.valueOf(startDate + " 12:00:00");
+        Timestamp end_date = Timestamp.valueOf(endDate + " 12:00:00");
 
         try {
             while (sessions.next()) {
@@ -138,8 +138,8 @@ public class DatabaseManager {
         String query = "SELECT * FROM Sessions WHERE id != " + sessionID;
         ResultSet sessions = queryExecutor.executeQuery(query);
 
-        Timestamp newStartDate_ts = Timestamp.valueOf(newStartDate + " 10:00:00");
-        Timestamp newEndDate_ts = Timestamp.valueOf(newEndDate + " 18:00:00");
+        Timestamp newStartDate_ts = Timestamp.valueOf(newStartDate + " 12:00:00");
+        Timestamp newEndDate_ts = Timestamp.valueOf(newEndDate + " 12:00:00");
 
         try {
             while (sessions.next()) {
@@ -171,7 +171,13 @@ public class DatabaseManager {
         Timestamp startDate = sessions.getTimestamp("start_date");
         Timestamp endDate = sessions.getTimestamp("end_date");
 
-        return newStartDate.after(startDate) && newStartDate.before(endDate);
+        if (newStartDate.after(startDate) && newStartDate.before(endDate))
+            return true;
+        if (newEndDate.after(startDate) && newEndDate.before(endDate))
+            return true;
+        if (newStartDate.equals(startDate) || newEndDate.equals(endDate))
+            return true;
+        return newStartDate.equals(endDate) || newEndDate.equals(startDate);
     }
 
     public DatabaseResponse insertMix(String filename, String path, String sessionName) {
