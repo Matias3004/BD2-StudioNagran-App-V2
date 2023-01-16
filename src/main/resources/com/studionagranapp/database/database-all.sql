@@ -1,5 +1,10 @@
 use Studio_nagran;
 
+DROP USER 'Owner'@'localhost';
+DROP USER 'Engineer'@'localhost';
+DROP USER 'Client'@'localhost';
+FLUSH PRIVILEGES;
+
 DROP TRIGGER Mix_notes_insert;
 DROP TRIGGER Mix_notes_update;
 DROP TRIGGER Mix_notes_delete;
@@ -132,7 +137,7 @@ add constraint Mixes_fk_1 foreign key (Session_id)
 
 alter table Mixes_history
 add constraint Mixes_history_fk_1 foreign key (Mix_id)
-    references Mixes (id);
+    references Mixes (id) ON DELETE CASCADE;
 
 alter table Mix_notes
 add constraint Mix_notes_fk_1 foreign key (Mix_id)
@@ -140,14 +145,11 @@ add constraint Mix_notes_fk_1 foreign key (Mix_id)
 
 alter table Mix_notes_history
 add constraint Mix_notes_history_fk_1 foreign key (Mix_note_id)
-    references Mix_notes (id);
+    references Mix_notes (id) ON DELETE CASCADE;
 
 alter table Equipment_history
 add constraint Equipment_history_fk_1 foreign key (Equipment_id)
     references Equipment (id) on delete cascade;
-    
-alter table Equipment_history
-drop foreign key Equipment_history_fk_1;
 
 delimiter $$
 
