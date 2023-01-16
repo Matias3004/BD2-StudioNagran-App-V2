@@ -3,6 +3,7 @@ package com.studionagranapp.guicontrollers.userdashboard.engineer;
 import com.studionagranapp.guicontrollers.userdashboard.ModifySessionController;
 import com.studionagranapp.helpers.configurators.choiceboxconfigurators.SessionsChoiceBoxConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
+import com.studionagranapp.helpers.configurators.tableconfigurators.MixNotesTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.MixesTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
@@ -67,6 +68,14 @@ public class EngineersDashboardController implements Initializable {
     @FXML
     private TableColumn<Mix, String> mixSessionColumn;
 
+    @FXML
+    private TableView<MixNote> mixNotesTable;
+    @FXML
+    private TableColumn<MixNote, String> mixColumn;
+    @FXML
+    private TableColumn<MixNote, String> mixNoteDescColumn;
+    @FXML
+    private TableColumn<MixNote, String> mixNoteDateColumn;
 
     @FXML
     private TableView<Equipment> equipmentTable;
@@ -81,10 +90,12 @@ public class EngineersDashboardController implements Initializable {
     private final ObservableList<Mix> mixesObservableList = FXCollections.observableArrayList();
     private final ObservableList<MixNote> mixNotesObservableList = FXCollections.observableArrayList();
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
+
     private final DatabaseManager databaseManager;
     private final SessionsTableConfigurator sessionsTableConfigurator;
     private final SessionsChoiceBoxConfigurator sessionsChoiceBoxConfigurator;
     private final MixesTableConfigurator mixesTableConfigurator;
+    private final MixNotesTableConfigurator mixNotesTableConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
     private final AlertManager alertManager;
 
@@ -93,6 +104,7 @@ public class EngineersDashboardController implements Initializable {
         sessionsTableConfigurator = new SessionsTableConfigurator();
         sessionsChoiceBoxConfigurator = new SessionsChoiceBoxConfigurator();
         mixesTableConfigurator = new MixesTableConfigurator();
+        mixNotesTableConfigurator = new MixNotesTableConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
@@ -109,9 +121,11 @@ public class EngineersDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionsTableConfigurator.provideEngineerConfiguration(sessionsObservableList, mySessionsTable, userId);
         mixesTableConfigurator.provideEngineerConfiguration(mixesObservableList, mixesTable, userId);
+        mixNotesTableConfigurator.provideEngineerConfiguration(mixNotesObservableList, mixNotesTable, userId);
         equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
         initMixesData();
+        initMixNotesData();
         initEquipmentData();
     }
 
@@ -256,9 +270,11 @@ public class EngineersDashboardController implements Initializable {
     private void refresh() {
         sessionsTableConfigurator.provideEngineerConfiguration(sessionsObservableList, mySessionsTable, userId);
         mixesTableConfigurator.provideEngineerConfiguration(mixesObservableList, mixesTable, userId);
+        mixNotesTableConfigurator.provideEngineerConfiguration(mixNotesObservableList, mixNotesTable, userId);
         equipmentTableConfigurator.provideFullConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
         initMixesData();
+        initMixNotesData();
         initEquipmentData();
     }
 
@@ -298,6 +314,21 @@ public class EngineersDashboardController implements Initializable {
     private void initSessionsChoiceBox(ChoiceBox<String> sessionsChoiceBox) {
         String query = "SELECT * FROM Sessions WHERE Engineer_id = " + this.userId;
         sessionsChoiceBoxConfigurator.initValues(query, sessionsChoiceBox);
+    }
+
+    private void initMixNotesData() {
+        mixColumn.setCellValueFactory(new PropertyValueFactory<>("filename"));
+        mixNoteDescColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        mixNoteDateColumn.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
+
+        mixNotesTable.setItems(mixNotesObservableList);
+
+        FilteredList<MixNote> filteredData = new FilteredList<>(mixNotesObservableList, b -> true);
+
+        SortedList<MixNote> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(mixNotesTable.comparatorProperty());
+
+        mixNotesTable.setItems(sortedData);
     }
 
     private void initEquipmentData() {

@@ -113,9 +113,9 @@
                            <center>
                                       <TableView fx:id="mixNotesTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0">
                                           <columns>
-                                              <TableColumn prefWidth="200.0" resizable="false" text="Miks" />
-                                              <TableColumn prefWidth="500.0" resizable="false" text="Opis" />
-                                              <TableColumn prefWidth="100.0" resizable="false" text="Data dodania" />
+                                              <TableColumn fx:id="mixColumn" prefWidth="200.0" resizable="false" text="Miks" />
+                                              <TableColumn fx:id="mixNoteDescColumn" prefWidth="500.0" resizable="false" text="Opis" />
+                                              <TableColumn fx:id="mixNoteDateColumn" prefWidth="100.0" resizable="false" text="Data dodania" />
                                           </columns>
                                       </TableView>
                            </center>
