@@ -2,12 +2,14 @@ package com.studionagranapp.guicontrollers.userdashboard.client;
 
 import com.studionagranapp.guicontrollers.userdashboard.ModifySessionController;
 import com.studionagranapp.helpers.configurators.tableconfigurators.EquipmentTableConfigurator;
+import com.studionagranapp.helpers.configurators.tableconfigurators.MixesTableConfigurator;
 import com.studionagranapp.helpers.configurators.tableconfigurators.SessionsTableConfigurator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
 import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.models.Equipment;
+import com.studionagranapp.helpers.models.Mix;
 import com.studionagranapp.helpers.models.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +26,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientsDashboardController implements Initializable {
@@ -39,38 +40,50 @@ public class ClientsDashboardController implements Initializable {
     private Label userInfo;
 
     @FXML
-    TableView<Session> mySessionsTable;
+    private TableView<Session> mySessionsTable;
     @FXML
-    TableColumn<Session, String> seshNameColumn;
+    private TableColumn<Session, String> seshNameColumn;
     @FXML
-    TableColumn<Session, String> seshBandColumn;
+    private TableColumn<Session, String> seshBandColumn;
     @FXML
-    TableColumn<Session, String> seshEngineerColumn;
+    private TableColumn<Session, String> seshEngineerColumn;
     @FXML
-    TableColumn<Session, Date> seshBeginColumn;
+    private TableColumn<Session, Date> seshBeginColumn;
     @FXML
-    TableColumn<Session, Date> seshEndColumn;
+    private TableColumn<Session, Date> seshEndColumn;
     @FXML
-    TableColumn<Session, Integer> seshDurationColumn;
+    private TableColumn<Session, Integer> seshDurationColumn;
 
     @FXML
-    TableView<Equipment> equipmentTable;
+    private TableView<Mix> mixesTable;
     @FXML
-    TableColumn<Equipment, String> eqNameColumn;
+    private TableColumn<Mix, String> mixNameColumn;
     @FXML
-    TableColumn<Equipment, Integer> eqTypeColumn;
+    private TableColumn<Mix, Date> mixDateColumn;
+    @FXML
+    private TableColumn<Mix, String> mixSessionColumn;
+
+    @FXML
+    private TableView<Equipment> equipmentTable;
+    @FXML
+    private TableColumn<Equipment, String> eqNameColumn;
+    @FXML
+    private TableColumn<Equipment, Integer> eqTypeColumn;
 
     private final ObservableList<Session> sessionsObservableList = FXCollections.observableArrayList();
+    private final ObservableList<Mix> mixesObservableList = FXCollections.observableArrayList();
     private final ObservableList<Equipment> equipmentObservableList = FXCollections.observableArrayList();
 
     private final DatabaseManager databaseManager;
     private final SessionsTableConfigurator sessionsTableConfigurator;
+    private final MixesTableConfigurator mixesTableConfigurator;
     private final EquipmentTableConfigurator equipmentTableConfigurator;
     private final AlertManager alertManager;
 
     public ClientsDashboardController() {
         databaseManager = DatabaseManager.getInstance();
         sessionsTableConfigurator = new SessionsTableConfigurator();
+        mixesTableConfigurator = new MixesTableConfigurator();
         equipmentTableConfigurator = new EquipmentTableConfigurator();
         alertManager = new AlertManager();
     }
@@ -86,8 +99,10 @@ public class ClientsDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionsTableConfigurator.provideClientConfiguration(sessionsObservableList, mySessionsTable, userId);
+        mixesTableConfigurator.provideClientConfiguration(mixesObservableList, mixesTable, userId);
         equipmentTableConfigurator.provideClientConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
+        initMixesData();
         initEquipmentData();
     }
 
@@ -161,10 +176,17 @@ public class ClientsDashboardController implements Initializable {
     }
 
     @FXML
+    private void addMixNote() {
+
+    }
+
+    @FXML
     private void refresh() {
         sessionsTableConfigurator.provideClientConfiguration(sessionsObservableList, mySessionsTable, userId);
+        mixesTableConfigurator.provideClientConfiguration(mixesObservableList, mixesTable, userId);
         equipmentTableConfigurator.provideClientConfiguration(equipmentObservableList, equipmentTable);
         initSessionsData();
+        initMixesData();
         initEquipmentData();
     }
 
@@ -184,6 +206,21 @@ public class ClientsDashboardController implements Initializable {
         sortedData.comparatorProperty().bind(mySessionsTable.comparatorProperty());
 
         mySessionsTable.setItems(sortedData);
+    }
+
+    private void initMixesData() {
+        mixNameColumn.setCellValueFactory(new PropertyValueFactory<>("filename"));
+        mixDateColumn.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
+        mixSessionColumn.setCellValueFactory(new PropertyValueFactory<>("sessionName"));
+
+        mixesTable.setItems(mixesObservableList);
+
+        FilteredList<Mix> filteredData = new FilteredList<>(mixesObservableList, b -> true);
+
+        SortedList<Mix> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(mixesTable.comparatorProperty());
+
+        mixesTable.setItems(sortedData);
     }
 
     private void initEquipmentData() {

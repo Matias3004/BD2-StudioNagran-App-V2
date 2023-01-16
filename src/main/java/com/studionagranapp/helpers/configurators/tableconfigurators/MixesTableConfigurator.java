@@ -55,11 +55,11 @@ public class MixesTableConfigurator {
                     "Mixes.upload_date, " +
                     "Mixes.path, " +
                     "Session.session_name, " +
-                    "Session.band_name as session_band " +
+                    "Session.band_name " +
                     "FROM Mixes " +
                     "JOIN Sessions as Session " +
-                    "ON Session.id = Mixes.Session_id" +
-                    "WHERE Session.Client_id = " + userId;
+                    "ON Session.id = Mixes.Session_id " +
+                    "WHERE Session.Clients_id = " + userId;
             ResultSet mixes = databaseManager.executeQuery(query);
 
             while (mixes.next()) {

@@ -76,6 +76,35 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Miksy">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <center>
+                                    <TableView fx:id="mixesTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="800.0">
+                                        <columns>
+                                            <TableColumn fx:id="mixNameColumn" prefWidth="325.0" resizable="false" text="Nazwa" />
+                                            <TableColumn fx:id="mixDateColumn" prefWidth="325.0" resizable="false" text="Data Dodania" />
+                                            <TableColumn fx:id="mixSessionColumn" prefWidth="150.0" resizable="false" text="Sesja" />
+                                        </columns>
+                                    </TableView>
+                                </center>
+                                <bottom>
+                                    <AnchorPane prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+                                        <children>
+                                            <Button layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#addMixNote" prefHeight="32.0" prefWidth="160.0" style="-fx-background-color: #EEEEEE;" text="Dodaj uwagę do miksu" textFill="#b25900">
+                                                <font>
+                                                    <Font name="SF Pro Display Bold" size="14.0" />
+                                                </font>
+                                            </Button>
+                                        </children>
+                                    </AnchorPane>
+                                </bottom>
+                            </BorderPane>
+                        </children></AnchorPane>
+                </content>
+            </Tab>
             <Tab text="Wyposażenie studia">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
