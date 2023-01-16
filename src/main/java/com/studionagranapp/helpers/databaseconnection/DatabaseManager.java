@@ -21,8 +21,6 @@ public class DatabaseManager {
     private final QueryExecutor queryExecutor;
     private final AlertManager alertManager;
 
-    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
     private DatabaseManager() {
         databaseConnector = new DatabaseConnector();
         queryExecutor = new QueryExecutor();
