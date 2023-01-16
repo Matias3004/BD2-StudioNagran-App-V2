@@ -1,6 +1,7 @@
 package com.studionagranapp.guicontrollers.userdashboard.client;
 
 import com.studionagranapp.helpers.configurators.choiceboxconfigurators.EngineersChoiceBoxConfigurator;
+import com.studionagranapp.helpers.configurators.datepickerconfigurators.DatePickerConfigurator;
 import com.studionagranapp.helpers.databaseconnection.DatabaseManager;
 import com.studionagranapp.helpers.databaseconnection.DatabaseResponse;
 import com.studionagranapp.helpers.errorhandling.AlertManager;
@@ -31,11 +32,13 @@ public class NewSessionDashboardController implements Initializable {
 
     private final DatabaseManager databaseManager;
     private final EngineersChoiceBoxConfigurator engineersChoiceBoxConfigurator;
+    private final DatePickerConfigurator datePickerConfigurator;
     private AlertManager alertManager;
 
     public NewSessionDashboardController() {
         databaseManager = DatabaseManager.getInstance();
         engineersChoiceBoxConfigurator = new EngineersChoiceBoxConfigurator();
+        datePickerConfigurator = new DatePickerConfigurator();
         alertManager = new AlertManager();
     }
 
@@ -46,6 +49,7 @@ public class NewSessionDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initEngineersChoiceBox();
+        initDatePickers();
     }
 
     @FXML
@@ -93,5 +97,11 @@ public class NewSessionDashboardController implements Initializable {
     private void initEngineersChoiceBox() {
         String query = "SELECT * FROM User_accounts WHERE role = 'ENGINEER'";
         engineersChoiceBoxConfigurator.initValues(query, engineersChoiceBox);
+    }
+
+    private void initDatePickers() {
+        String query = "SELECT start_date, end_date FROM Sessions";
+        datePickerConfigurator.provideConfiguration(query, startDateField);
+        datePickerConfigurator.provideConfiguration(query, endDateField);
     }
 }
