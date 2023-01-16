@@ -203,6 +203,24 @@ public class DatabaseManager {
         }
     }
 
+    public DatabaseResponse insertMixNote(String description, Integer mixID) {
+        String query = "INSERT INTO Mix_notes (upload_date, description, Mix_id) VALUES (?,?,?)";
+        try {
+            PreparedStatement preparedMixNote = getConnection().prepareStatement(query);
+            preparedMixNote.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+
+            return getDatabaseResponse(description, mixID, preparedMixNote);
+        } catch (SQLException e) {
+            alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+
+            return DatabaseResponse.ERROR;
+        } catch (Exception e) {
+            alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane");
+
+            return DatabaseResponse.ERROR;
+        }
+    }
+
     public DatabaseResponse insertEquipment(String eqName, String eqType, String eqQuantity, String backline) {
         int isBackline = 0;
         if (backline.equals("Tak"))
@@ -215,27 +233,32 @@ public class DatabaseManager {
             return getDatabaseResponse(eqName, eqType, eqQuantity, isBackline, preparedStatement);
         } catch (SQLException e) {
             alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+
+            return DatabaseResponse.ERROR;
         } catch (Exception e) {
             alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane");
-        }
 
-        return DatabaseResponse.ERROR;
+            return DatabaseResponse.ERROR;
+        }
     }
 
-    public DatabaseResponse updateEquipmentQuantity(Integer id, String newQuantity) {
-        String query = "UPDATE Equipment SET quantity = (?) WHERE id = (?)";
+    public DatabaseResponse updateEquipmentQuantity(Integer id, String quantity) {
+        int newQuantity = Integer.parseInt(quantity);
 
+        String query = "UPDATE Equipment SET quantity = (?) WHERE id = (?)";
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
 
             return getDatabaseResponse(newQuantity, id, preparedStatement);
         } catch (SQLException e) {
             alertManager.throwError("Wystąpił błąd podczas zapisu danych do bazy");
+
+            return DatabaseResponse.ERROR;
         } catch (Exception e) {
             alertManager.throwError("Cos poszło nie tak. Sprawdź wprowadzone dane.");
-        }
 
-        return DatabaseResponse.ERROR;
+            return DatabaseResponse.ERROR;
+        }
     }
 
     private DatabaseResponse getDatabaseResponse(String first_name, String last_name, String username, String password, String role, String email, String phone_number, PreparedStatement preparedClient) throws SQLException {
@@ -282,6 +305,14 @@ public class DatabaseManager {
         return DatabaseResponse.SUCCESS;
     }
 
+    private DatabaseResponse getDatabaseResponse(String description, Integer mixID, PreparedStatement preparedMixNote) throws SQLException {
+        preparedMixNote.setString(2, description);
+        preparedMixNote.setInt(3, mixID);
+        preparedMixNote.execute();
+
+        return DatabaseResponse.SUCCESS;
+    }
+
     private DatabaseResponse getDatabaseResponse(String eqName, String eqType, String eqQuantity, Integer backline, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, eqName);
         preparedStatement.setString(2, eqType);
@@ -292,8 +323,8 @@ public class DatabaseManager {
         return DatabaseResponse.SUCCESS;
     }
 
-    private DatabaseResponse getDatabaseResponse(String newQuantity, Integer id, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, newQuantity);
+    private DatabaseResponse getDatabaseResponse(Integer newQuantity, Integer id, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setInt(1, newQuantity);
         preparedStatement.setInt(2, id);
         preparedStatement.execute();
 

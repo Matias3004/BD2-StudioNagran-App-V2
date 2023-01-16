@@ -11,21 +11,26 @@ import com.studionagranapp.helpers.contentloaders.SceneCreator;
 import com.studionagranapp.helpers.models.Equipment;
 import com.studionagranapp.helpers.models.Mix;
 import com.studionagranapp.helpers.models.Session;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientsDashboardController implements Initializable {
@@ -177,7 +182,53 @@ public class ClientsDashboardController implements Initializable {
 
     @FXML
     private void addMixNote() {
+        try {
+            Mix mix = mixesTable.getSelectionModel().getSelectedItem();
+            if (mix == null)
+                throw new Exception();
 
+            Dialog<Pair<String, String>> addMixDialog = new Dialog<>();
+            addMixDialog.setTitle("Dodawanie uwagi do miksu");
+            addMixDialog.setHeaderText("Dodaj uwagę");
+
+            ButtonType loginButtonType = new ButtonType("Dodaj", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButtonType = new ButtonType("Powrót", ButtonBar.ButtonData.CANCEL_CLOSE);
+            addMixDialog.getDialogPane().getButtonTypes().addAll(loginButtonType, cancelButtonType);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            TextArea description = new TextArea();
+            description.setPromptText("Uwaga");
+
+            grid.add(new Label("Tresć uwagi:"), 0, 0);
+            grid.add(description, 0, 1);
+
+            addMixDialog.getDialogPane().setContent(grid);
+
+            Platform.runLater(description::requestFocus);
+
+            Optional<Pair<String, String>> result = addMixDialog.showAndWait();
+
+            if (result.isPresent() && !description.getText().isBlank()) {
+                DatabaseResponse newMixResult = databaseManager
+                        .insertMixNote(description.getText(),
+                                mix.getId());
+                if (newMixResult == DatabaseResponse.SUCCESS) {
+                    alertManager.throwInformation("Miks dodany pomyslnie!");
+                    refresh();
+                }
+                else
+                    alertManager.throwError("Błąd zapisu danych do bazy!");
+            } else {
+                alertManager.throwError("Sprawdź wprowadzone dane!");
+                addMixNote();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnego miksu z listy!");
+        }
     }
 
     @FXML
