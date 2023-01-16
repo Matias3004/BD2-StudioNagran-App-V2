@@ -42,12 +42,6 @@ public class EngineersDashboardController implements Initializable {
     private Label userInfo;
     @FXML
     private Button logoutButton;
-    @FXML
-    private Button modifySessionButton;
-    @FXML
-    private Button cancelSessionButton;
-    @FXML
-    private Button addMixButton;
 
     @FXML
     private TableView<Session> mySessionsTable;
@@ -231,6 +225,30 @@ public class EngineersDashboardController implements Initializable {
         } else {
             alertManager.throwError("Sprawdź wprowadzone dane!");
             addMix();
+        }
+    }
+
+    @FXML
+    private void deleteMix() {
+        try {
+            Mix mix = mixesTable.getSelectionModel().getSelectedItem();
+            if (mix == null)
+                throw new Exception();
+
+            boolean confirmation = alertManager
+                    .throwConfirmation("Czy na pewno chcesz usunąć wybrany miks?");
+            if (!confirmation)
+                return;
+
+            DatabaseResponse result = databaseManager.delete(mix);
+            if (result == DatabaseResponse.ERROR)
+                alertManager.throwError("Wystąpił błąd podczas usuwania danych z bazy");
+            else if (result == DatabaseResponse.SUCCESS) {
+                alertManager.throwInformation("Miks usunięty pomyslnie!");
+                refresh();
+            }
+        } catch (Exception e) {
+            alertManager.throwError("Nie wybrano żadnego miksu z listy!");
         }
     }
 

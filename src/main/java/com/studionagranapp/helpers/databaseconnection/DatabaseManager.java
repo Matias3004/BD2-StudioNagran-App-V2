@@ -2,6 +2,7 @@ package com.studionagranapp.helpers.databaseconnection;
 
 import com.studionagranapp.helpers.errorhandling.AlertManager;
 import com.studionagranapp.helpers.models.Equipment;
+import com.studionagranapp.helpers.models.Mix;
 import com.studionagranapp.helpers.models.Session;
 import com.studionagranapp.helpers.models.User;
 import com.studionagranapp.helpers.query.QueryExecutor;
@@ -307,6 +308,12 @@ public class DatabaseManager {
 
     public DatabaseResponse delete(User engineer) {
         String deleteQuery = "DELETE FROM User_accounts WHERE account_id = " + engineer.getAccountId();
+
+        return performDeletion(deleteQuery);
+    }
+
+    public DatabaseResponse delete(Mix mix) {
+        String deleteQuery = "DELETE FROM Mixes WHERE id = " + mix.getId();
 
         return performDeletion(deleteQuery);
     }
