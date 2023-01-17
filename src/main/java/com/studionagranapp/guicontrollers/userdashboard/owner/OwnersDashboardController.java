@@ -25,7 +25,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.net.URL;
 import java.sql.Date;
@@ -212,7 +211,7 @@ public class OwnersDashboardController implements Initializable {
 
     @FXML
     public void addEquipment() {
-        Dialog<Pair<String, String>> addEquipmentDialog = new Dialog<>();
+        Dialog<ButtonType> addEquipmentDialog = new Dialog<>();
         addEquipmentDialog.setTitle("Dodawanie sprzętu");
         addEquipmentDialog.setHeaderText("Dodaj nowy sprzęt");
 
@@ -248,11 +247,10 @@ public class OwnersDashboardController implements Initializable {
 
         Platform.runLater(equipmentName::requestFocus);
 
-        Optional<Pair<String, String>> result = addEquipmentDialog.showAndWait();
-
+        Optional<ButtonType> result = addEquipmentDialog.showAndWait();
         if (result.isPresent() && !equipmentName.getText().isBlank() && !equipmentType.getText().isBlank() &&
-                !equipmentQuantity.getText().isBlank() &&
-                !(backlineChoiceBox.getSelectionModel().getSelectedItem() == null)) {
+                    !equipmentQuantity.getText().isBlank() &&
+                    !(backlineChoiceBox.getSelectionModel().getSelectedItem() == null)) {
             DatabaseResponse newEquipmentResult = databaseManager
                     .insertEquipment(equipmentName.getText(),
                             equipmentType.getText(),
@@ -261,10 +259,11 @@ public class OwnersDashboardController implements Initializable {
             if (newEquipmentResult == DatabaseResponse.SUCCESS) {
                 alertManager.throwInformation("Sprzęt dodany pomyslnie!");
                 refresh();
-            }
-            else
+            } else
                 alertManager.throwError("Błąd zapisu danych do bazy!");
-        } else {
+        } else if (result.isPresent() && result.get() == cancelButtonType)
+            return;
+        else {
             alertManager.throwError("Sprawdź wprowadzone dane!");
             addEquipment();
         }

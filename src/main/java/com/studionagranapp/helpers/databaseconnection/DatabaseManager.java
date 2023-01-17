@@ -172,6 +172,8 @@ public class DatabaseManager {
             return true;
         if (newEndDate.after(startDate) && newEndDate.before(endDate))
             return true;
+        if (newStartDate.before(startDate) && newEndDate.after(endDate))
+            return true;
         if (newStartDate.equals(startDate) || newEndDate.equals(endDate))
             return true;
         return newStartDate.equals(endDate) || newEndDate.equals(startDate);
