@@ -62,65 +62,60 @@ CREATE TABLE Equipment (
     quantity int NOT NULL,
     backline bool NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY name_unique (name)
+    UNIQUE KEY name_u (name)
 );
 
 CREATE TABLE Equipment_history (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
     action enum('insert', 'update', 'delete'),
     action_time timestamp DEFAULT current_timestamp,
     Equipment_id int,
     name varchar(64) NOT NULL,
     type varchar(64),
     quantity int NOT NULL,
-    backline bool NOT NULL
+    backline bool NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Mixes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    filename varchar(255) NOT NULL unique,
-    upload_date timestamp default current_timestamp NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    filename varchar(255) NOT NULL,
+    upload_date timestamp DEFAULT current_timestamp NOT NULL,
     path varchar(255) NOT NULL unique,
-    Session_id int NOT NULL
+    Session_id int NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY filename_u (filename),
+    UNIQUE KEY path_u (path)
 );
 
 CREATE TABLE Mixes_history (
     id INT AUTO_INCREMENT PRIMARY KEY,
     action enum('insert', 'update', 'delete'),
-    action_time timestamp default current_timestamp,
+    action_time timestamp DEFAULT current_timestamp,
     Mix_id int,
     filename varchar(255) NOT NULL,
-    upload_date timestamp default current_timestamp NOT NULL,
+    upload_date timestamp DEFAULT current_timestamp NOT NULL,
     path varchar(255) NOT NULL,
     Session_id int NOT NULL
 );
 
 CREATE TABLE Mix_notes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    upload_date timestamp default current_timestamp NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    upload_date timestamp DEFAULT current_timestamp NOT NULL,
     description varchar(255) NOT NULL,
-    Mix_id int NOT NULL
+    Mix_id int NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Mix_notes_history (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
     action enum('insert', 'update', 'delete'),
-    action_time timestamp default current_timestamp,
+    action_time timestamp DEFAULT current_timestamp,
     Mix_note_id int,
-    upload_date timestamp default current_timestamp NOT NULL,
+    upload_date timestamp DEFAULT current_timestamp NOT NULL,
     description varchar(255) NOT NULL,
-    Mix_id int NOT NULL
-);
-
-alter table Equipment
-add (
-    constraint name_u unique (name)
-);
-
-alter table Mixes
-add (
-    constraint filename_u unique (filename),
-    constraint path_u unique (path)
+    Mix_id int NOT NULL,
+    PRIMARY KEY (id)
 );
 
 ALTER TABLE Sessions
@@ -131,25 +126,25 @@ ALTER TABLE Sessions
             REFERENCES User_accounts (account_id) ON DELETE CASCADE
         );
 
-alter table Mixes
-add constraint Mixes_fk_1 foreign key (Session_id)
-    references Sessions (id) on delete cascade;
+ALTER TABLE Mixes
+ADD CONSTRAINT Mixes_fk_1 FOREIGN KEY (Session_id)
+    REFERENCES Sessions (id) ON DELETE CASCADE;
 
-alter table Mixes_history
-add constraint Mixes_history_fk_1 foreign key (Mix_id)
-    references Mixes (id) ON DELETE CASCADE;
+ALTER TABLE Mixes_history
+ADD CONSTRAINT Mixes_history_fk_1 FOREIGN KEY (Mix_id)
+    REFERENCES Mixes (id) ON DELETE CASCADE;
 
-alter table Mix_notes
-add constraint Mix_notes_fk_1 foreign key (Mix_id)
-    references Mixes (id) on delete cascade;
+ALTER TABLE Mix_notes
+ADD CONSTRAINT Mix_notes_fk_1 FOREIGN KEY (Mix_id)
+    REFERENCES Mixes (id) ON DELETE CASCADE;
 
-alter table Mix_notes_history
-add constraint Mix_notes_history_fk_1 foreign key (Mix_note_id)
-    references Mix_notes (id) ON DELETE CASCADE;
+ALTER TABLE Mix_notes_history
+ADD CONSTRAINT Mix_notes_history_fk_1 FOREIGN KEY (Mix_note_id)
+    REFERENCES Mix_notes (id) ON DELETE CASCADE;
 
-alter table Equipment_history
-add constraint Equipment_history_fk_1 foreign key (Equipment_id)
-    references Equipment (id) on delete cascade;
+ALTER TABLE Equipment_history
+ADD CONSTRAINT Equipment_history_fk_1 FOREIGN KEY (Equipment_id)
+    REFERENCES Equipment (id) ON DELETE CASCADE;
 
 delimiter $$
 
