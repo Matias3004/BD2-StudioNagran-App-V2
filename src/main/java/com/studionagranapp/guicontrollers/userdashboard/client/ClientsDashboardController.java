@@ -184,7 +184,7 @@ public class ClientsDashboardController implements Initializable {
             if (mix == null)
                 throw new Exception();
 
-            Dialog<Pair<String, String>> addMixDialog = new Dialog<>();
+            Dialog<ButtonType> addMixDialog = new Dialog<>();
             addMixDialog.setTitle("Dodawanie uwagi do miksu");
             addMixDialog.setHeaderText("Dodaj uwagę");
 
@@ -207,7 +207,7 @@ public class ClientsDashboardController implements Initializable {
 
             Platform.runLater(description::requestFocus);
 
-            Optional<Pair<String, String>> result = addMixDialog.showAndWait();
+            Optional<ButtonType> result = addMixDialog.showAndWait();
 
             if (result.isPresent() && !description.getText().isBlank()) {
                 DatabaseResponse newMixResult = databaseManager
@@ -219,7 +219,10 @@ public class ClientsDashboardController implements Initializable {
                 }
                 else
                     alertManager.throwError("Błąd zapisu danych do bazy!");
-            } else {
+            } else if (result.isPresent() && result.get() == cancelButtonType) {
+                return;
+            }
+            else {
                 alertManager.throwError("Sprawdź wprowadzone dane!");
                 addMixNote();
             }
