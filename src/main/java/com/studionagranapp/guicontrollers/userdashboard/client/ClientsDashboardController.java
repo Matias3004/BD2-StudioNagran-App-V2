@@ -211,17 +211,14 @@ public class ClientsDashboardController implements Initializable {
 
             if (result.isPresent() && !description.getText().isBlank()) {
                 DatabaseResponse newMixResult = databaseManager
-                        .insertMixNote(description.getText(),
-                                mix.getId());
+                        .insertMixNote(description.getText(), mix.getId());
                 if (newMixResult == DatabaseResponse.SUCCESS) {
                     alertManager.throwInformation("Uwaga do miksu dodana pomyslnie!");
                     refresh();
-                }
-                else
+                } else
                     alertManager.throwError("Błąd zapisu danych do bazy!");
-            } else if (result.isPresent() && result.get() == cancelButtonType) {
+            } else if (result.isPresent() && result.get() == cancelButtonType)
                 return;
-            }
             else {
                 alertManager.throwError("Sprawdź wprowadzone dane!");
                 addMixNote();
