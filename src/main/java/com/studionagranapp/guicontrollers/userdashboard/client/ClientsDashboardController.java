@@ -214,7 +214,7 @@ public class ClientsDashboardController implements Initializable {
                         .insertMixNote(description.getText(),
                                 mix.getId());
                 if (newMixResult == DatabaseResponse.SUCCESS) {
-                    alertManager.throwInformation("Miks dodany pomyslnie!");
+                    alertManager.throwInformation("Uwaga do miksu dodana pomyslnie!");
                     refresh();
                 }
                 else
