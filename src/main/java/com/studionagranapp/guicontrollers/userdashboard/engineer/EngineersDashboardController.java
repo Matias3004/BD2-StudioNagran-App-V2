@@ -190,7 +190,7 @@ public class EngineersDashboardController implements Initializable {
 
     @FXML
     private void addMix() {
-        Dialog<Pair<String, String>> addMixDialog = new Dialog<>();
+        Dialog<ButtonType> addMixDialog = new Dialog<>();
         addMixDialog.setTitle("Dodawanie miksu do sesji");
         addMixDialog.setHeaderText("Dodaj miks");
 
@@ -221,8 +221,7 @@ public class EngineersDashboardController implements Initializable {
 
         Platform.runLater(filename::requestFocus);
 
-        Optional<Pair<String, String>> result = addMixDialog.showAndWait();
-
+        Optional<ButtonType> result = addMixDialog.showAndWait();
         if (result.isPresent() && !filename.getText().isBlank() &&
                 !filePath.getText().isBlank() &&
                 !(sessionChoiceBox.getSelectionModel().getSelectedItem() == null)) {
@@ -236,7 +235,9 @@ public class EngineersDashboardController implements Initializable {
             }
             else
                 alertManager.throwError("Błąd zapisu danych do bazy!");
-        } else {
+        }else if (result.isPresent() && result.get() == cancelButtonType)
+            return;
+        else {
             alertManager.throwError("Sprawdź wprowadzone dane!");
             addMix();
         }
