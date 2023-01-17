@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -35,6 +36,10 @@ public class NewClientsDashboardController implements Initializable {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private PasswordField repeatPasswordField;
+    @FXML
+    private Label statementField;
 
     @FXML
     private TableView<Equipment> equipmentTable;
@@ -71,6 +76,13 @@ public class NewClientsDashboardController implements Initializable {
     @FXML
     private void registerUser() {
         if (isDataFieldsBlank()) {
+            if (!passwordField.getText().equals(repeatPasswordField.getText())) {
+                statementField.setTextFill(Color.RED);
+                statementField.setText("Hasła są inne");
+
+                return;
+            }
+            statementField.setText("");
             DatabaseResponse newClientResult = databaseManager
                     .insertClient(nameField.getText(),
                             surnameField.getText(),
