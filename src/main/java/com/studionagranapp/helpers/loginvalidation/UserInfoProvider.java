@@ -16,7 +16,7 @@ public class UserInfoProvider {
     }
 
     private void init(String username, String password) {
-        String getUserQuery = "SELECT * FROM Studio_nagran.User_accounts WHERE username = '" +
+        String getUserQuery = "SELECT * FROM User_accounts WHERE username = '" +
                 username + "' AND password = '" + password + "'";
         try {
             ResultSet user = databaseManager.executeQuery(getUserQuery);

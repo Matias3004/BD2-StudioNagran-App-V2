@@ -3,7 +3,7 @@ module com.example.studionagranapp {
     requires javafx.fxml;
 
     requires java.sql;
-    requires mysql.connector.java;
+    requires org.postgresql.jdbc;
 
     opens com.studionagranapp to javafx.fxml;
     opens com.studionagranapp.guicontrollers.login;
